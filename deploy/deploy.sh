@@ -17,10 +17,10 @@ echo "** Starting zipkin-cassandra"
 docker run -d --name="${NAME_PREFIX}cassandra" "${IMG_PREFIX}cassandra"
 
 echo "** Starting zipkin-collector"
-docker run -d --link="${NAME_PREFIX}cassandra:db" --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector"
+docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9410:9410 --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector"
 
 echo "** Starting zipkin-query"
-docker run -d --link="${NAME_PREFIX}cassandra:db" --name="${NAME_PREFIX}query" "${IMG_PREFIX}query"
+docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:9411 --name="${NAME_PREFIX}query" "${IMG_PREFIX}query"
 
 echo "** Starting zipkin-web"
 docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$PUBLIC_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web"
