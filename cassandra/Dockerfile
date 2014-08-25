@@ -3,7 +3,6 @@ MAINTAINER Zero Cho "http://itsze.ro"
 
 ADD install.sh /usr/local/bin/install
 RUN /usr/local/bin/install
-RUN ln -s /proc/mounts /etc/mtab
 ADD run.sh /usr/local/bin/run
 ENTRYPOINT ["/usr/local/bin/run"]
 
