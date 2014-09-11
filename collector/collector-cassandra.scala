@@ -17,6 +17,11 @@ import com.twitter.zipkin.builder.Scribe
 import com.twitter.zipkin.cassandra
 import com.twitter.zipkin.collector.builder.CollectorServiceBuilder
 import com.twitter.zipkin.storage.Store
+import com.twitter.logging.LoggerFactory
+import com.twitter.logging.LoggerFactory
+import com.twitter.logging.Level
+import com.twitter.logging.ConsoleHandler
+import com.twitter.zipkin.builder.ZipkinServerBuilder
 
 val keyspaceBuilder = cassandra.Keyspace.static(nodes = Set("localhost"))
 val cassandraBuilder = Store.Builder(
