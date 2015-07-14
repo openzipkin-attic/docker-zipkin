@@ -20,6 +20,3 @@ web:
     - query
   ports:
     - 8080:8080
-  environment: {
-    ROOTURL: "http://172.17.42.1:8080"
-    }
