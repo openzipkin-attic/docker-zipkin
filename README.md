@@ -18,6 +18,12 @@ Note that if you changed PREFIX in build.sh to build your own images, you need
 to make same changes here in deploy.sh. Otherwise, it will still use the
 standard images pushed by me.
 
+Alternatively, you can use
+[docker-compose](https://docs.docker.com/compose/) by doing `cd
+deploy; docker-compose up`. Note that you may want to change the
+**PREFIX** in `deploy/docker-compose.yml` if you don't want to use the
+images from Docker Index.
+
 ## Notes
 
 Docker-Zipkin starts the services in their own container: zipkin-cassandra,
