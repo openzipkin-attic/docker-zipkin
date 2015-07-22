@@ -38,6 +38,13 @@ respective line in deploy.sh to map the port.
 All images with the exception of zipkin-cassandra are sharing a base image:
 zipkin-base. zipkin-base and zipkin-cassandra is built on debian:sid.
 
+`build.sh` performs some fairly intensive tasks, the heaviest of which is running
+SBT. Long story short, make sure your Docker machine has 4GB memory.
+
+Ex. If you are literally running build.sh locally..
+```bash
+$ docker-machine create --driver virtualbox --virtualbox-memory "4096" dev
+```
 ## Author
 
 Zero Cho <itszero@gmail.com>
