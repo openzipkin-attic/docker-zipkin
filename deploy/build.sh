@@ -9,6 +9,8 @@ IMAGES=("base" "cassandra" "collector" "query" "web")
 
 for image in ${IMAGES[@]}; do
   pushd "../$image"
+  [[ -x ./prepare.sh ]] && ./prepare.sh
   docker build -t "$PREFIX$image" .
+  [[ -x ./cleanup.sh ]] && ./cleanup.sh
   popd
 done
