@@ -2,16 +2,24 @@ cassandra:
   image: itszero/zipkin-cassandra
 collector:
   image: itszero/zipkin-collector
+  environment:
+    - BLOCK_ON_CASSANDRA=true
   expose:
     - 9410
   ports:
     - 9410:9410
+    - 9900:9900
   links:
     - cassandra:db
 query:
   image: itszero/zipkin-query
+  environment:
+    - BLOCK_ON_CASSANDRA=true
   expose:
     - 9411
+  ports:
+    - 9411:9411
+    - 9901:9901
   links:
     - cassandra:db
 web:
@@ -20,3 +28,4 @@ web:
     - query
   ports:
     - 8080:8080
+    - 9990:9990
