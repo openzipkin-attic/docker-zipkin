@@ -26,7 +26,7 @@ else
 fi
 
 SERVICE_NAME="zipkin-query-service"
-CONFIG="${SERVICE_NAME}/config/query-cassandra.scala"
+CONFIG="/query-cassandra.scala"
 
 echo "** Starting ${SERVICE_NAME}..."
-./$SERVICE_NAME/build/install/$SERVICE_NAME/bin/$SERVICE_NAME -f $CONFIG
+java -jar ./${SERVICE_NAME}/build/libs/${SERVICE_NAME}*-all.jar -f ${CONFIG}

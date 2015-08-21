@@ -11,4 +11,4 @@ DEFAULT_ROOTURL=http://localhost:8080/
 ROOTURL="-zipkin.web.rootUrl=${ROOTURL:-DEFAULT_ROOTURL}"
 
 echo "** Starting ${SERVICE_NAME}..."
-./$SERVICE_NAME/build/install/$SERVICE_NAME/bin/$SERVICE_NAME -zipkin.web.query.dest=${QUERY_ADDR} $ROOTURL
+java -jar ./${SERVICE_NAME}/build/libs/${SERVICE_NAME}*-all.jar -zipkin.web.query.dest=${QUERY_ADDR} ${ROOTURL}
