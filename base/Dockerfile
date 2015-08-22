@@ -1,9 +1,13 @@
 FROM debian:sid
 MAINTAINER Zero Cho "http://itsze.ro"
 
-RUN apt-get update
-RUN apt-get install -y scala git curl openjdk-7-jdk netcat
+RUN apt-get update && apt-get install -y \
+  curl \
+  openjdk-8-jre-headless \
+  netcat
 
-ADD zipkin /zipkin
+ENV ZIPKIN_REPO https://jcenter.bintray.com
+ENV ZIPKIN_VERSION 1.2.2
+
+RUN mkdir /zipkin
 WORKDIR /zipkin
-RUN ./gradlew build -x test

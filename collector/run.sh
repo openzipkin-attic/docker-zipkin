@@ -25,8 +25,5 @@ else
 	done
 fi
 
-SERVICE_NAME="zipkin-collector-service"
-CONFIG="/collector-cassandra.scala"
-
-echo "** Starting ${SERVICE_NAME}..."
-java -jar ./${SERVICE_NAME}/build/libs/${SERVICE_NAME}*-all.jar -f ${CONFIG}
+echo "** Starting zipkin collector..."
+java -jar zipkin-collector.jar -f /collector-cassandra.scala

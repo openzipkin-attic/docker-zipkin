@@ -10,5 +10,6 @@ SERVICE_NAME="zipkin-web"
 DEFAULT_ROOTURL=http://localhost:8080/
 ROOTURL="-zipkin.web.rootUrl=${ROOTURL:-DEFAULT_ROOTURL}"
 
-echo "** Starting ${SERVICE_NAME}..."
-java -jar ./${SERVICE_NAME}/build/libs/${SERVICE_NAME}*-all.jar -zipkin.web.query.dest=${QUERY_ADDR} ${ROOTURL}
+echo "** Starting zipkin web..."
+# cacheResources implies serving web assets from the jar, as opposed to a local filesystem path
+java -jar zipkin-web.jar -zipkin.web.cacheResources=true -zipkin.web.query.dest=${QUERY_ADDR} ${ROOTURL}
