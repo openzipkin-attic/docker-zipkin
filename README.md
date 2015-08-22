@@ -22,14 +22,6 @@ The started Zipkin instance would be backed by a single node Cassandra.
 All images with the exception of zipkin-cassandra are sharing a base image:
 zipkin-base. zipkin-base and zipkin-cassandra is built on `debian:sid`.
 
-`build.sh` performs some fairly intensive tasks, the heaviest of which is running
-gradle. Long story short, make sure your Docker machine has 4GB memory.
-
-Ex. If you are literally running build.sh locally..
-```bash
-$ docker-machine create --driver virtualbox --virtualbox-memory "4096" dev
-```
-
 ## Connecting to Span Storage
 
 `zipkin-collector` and `zipkin-query` store and retrieve spans from Cassandra, using its native protocol. Specify a list of one or more Cassandra nodes listening on port 9042, via the comma-separated environment variable `CASSANDRA_CONTACT_POINTS`.

@@ -1,6 +1,8 @@
 FROM itszero/zipkin-base
 MAINTAINER Zero Cho "http://itsze.ro"
 
+RUN curl -SL $ZIPKIN_REPO/io/zipkin/zipkin-web/$ZIPKIN_VERSION/zipkin-web-$ZIPKIN_VERSION-all.jar > zipkin-web.jar
+
 ADD run.sh /usr/local/bin/run
 ENTRYPOINT ["/usr/local/bin/run"]
 
