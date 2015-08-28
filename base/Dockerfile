@@ -1,5 +1,5 @@
 FROM debian:sid
-MAINTAINER Zero Cho "http://itsze.ro"
+MAINTAINER OpenZipkin "http://zipkin.io/"
 
 RUN apt-get update && apt-get install -y \
   curl \
