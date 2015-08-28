@@ -30,7 +30,3 @@ ex.
 ```bash
 docker run -d -p 9410:9410 -p 9900:9900 --name="zipkin-collector" -e "CASSANDRA_CONTACT_POINTS=node1,node2,node3" "itszero/zipkin-collector:latest"
 ```
-
-## Author
-
-Zero Cho <itszero@gmail.com>
