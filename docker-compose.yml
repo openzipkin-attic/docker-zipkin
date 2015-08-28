@@ -1,7 +1,7 @@
 cassandra:
-  image: itszero/zipkin-cassandra
+  image: openzipkin/zipkin-cassandra
 collector:
-  image: itszero/zipkin-collector
+  image: openzipkin/zipkin-collector:1.2.2
   environment:
     - BLOCK_ON_CASSANDRA=true
   expose:
@@ -12,7 +12,7 @@ collector:
   links:
     - cassandra:db
 query:
-  image: itszero/zipkin-query
+  image: openzipkin/zipkin-query:1.2.2
   environment:
     - BLOCK_ON_CASSANDRA=true
   expose:
@@ -23,7 +23,7 @@ query:
   links:
     - cassandra:db
 web:
-  image: itszero/zipkin-web
+  image: openzipkin/zipkin-web:1.2.2
   links:
     - query
   ports:

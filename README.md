@@ -1,15 +1,12 @@
 # docker-zipkin
 
-Dockerfiles for starting a Zipkin instance backed by Cassandra
+Dockerfiles for starting a Zipkin instance backed by Cassandra. Automatically built images are available on Docker Hub
+under the [OpenZipkin](https://hub.docker.com/u/openzipkin/) organization.
 
-## Build Images
+## Running
 
-Please run `cd deploy; ./build.sh` to build the images on your own computer.
-
-## Deploy Zipkin
-
-Use [docker-compose](https://docs.docker.com/compose/) by doing `cd
-deploy; docker-compose up`.
+Use [docker-compose](https://docs.docker.com/compose/) by doing
+`docker-compose up`.
 
 ## Notes
 
@@ -28,7 +25,7 @@ zipkin-base. zipkin-base and zipkin-cassandra is built on `debian:sid`.
 
 ex. 
 ```bash
-docker run -d -p 9410:9410 -p 9900:9900 --name="zipkin-collector" -e "CASSANDRA_CONTACT_POINTS=node1,node2,node3" "itszero/zipkin-collector:latest"
+docker run -d -p 9410:9410 -p 9900:9900 --name="zipkin-collector" -e "CASSANDRA_CONTACT_POINTS=node1,node2,node3" "openzipkin/zipkin-collector:latest"
 ```
 
 ## Author
