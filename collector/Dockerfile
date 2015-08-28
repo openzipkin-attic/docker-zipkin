@@ -1,5 +1,5 @@
 FROM itszero/zipkin-base
-MAINTAINER Zero Cho "http://itsze.ro"
+MAINTAINER OpenZipkin "http://zipkin.io/"
 
 RUN curl -SL $ZIPKIN_REPO/io/zipkin/zipkin-collector-service/$ZIPKIN_VERSION/zipkin-collector-service-$ZIPKIN_VERSION-all.jar > zipkin-collector.jar
 
