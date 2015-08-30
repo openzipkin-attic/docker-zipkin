@@ -14,6 +14,10 @@ This document describes how to release a new set of Docker images for OpenZipkin
     * Create a new docker tag `1.3` pointing to the git tag you'll create (probably `1.3.1-rc1` on the first try)
     * Create a new docker tag `1.3.1` pointing to the same git tag
 
+1. **Bump the `ZIPKIN_VERSION` ENV var in `zipkin-base`**
+
+   This will be used in various install scripts to pull in the right Zipkin release.
+
 1. **Bump the version in `FROM` statement in `Dockerfile`s**
 
    For the projects that depend on `zipkin-base`, change their `Dockerfile`s to start building `FROM` the tag
