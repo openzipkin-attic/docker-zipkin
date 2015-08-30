@@ -1,4 +1,4 @@
-FROM debian:sid
+FROM openzipkin/zipkin-base:1.2.2
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ADD install.sh /usr/local/bin/install
