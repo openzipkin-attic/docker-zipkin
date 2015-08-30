@@ -1,5 +1,5 @@
 cassandra:
-  image: openzipkin/zipkin-cassandra
+  image: openzipkin/zipkin-cassandra:1.2.2
 collector:
   image: openzipkin/zipkin-collector:1.2.2
   environment:
