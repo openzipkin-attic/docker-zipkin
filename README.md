@@ -1,5 +1,12 @@
 # docker-zipkin
 
+[![Build Status](https://travis-ci.org/openzipkin/docker-zipkin.svg)](https://travis-ci.org/openzipkin/docker-zipkin)
+[![zipkin-base](https://quay.io/repository/openzipkin/zipkin-base/status "zipkin-base")](https://quay.io/repository/openzipkin/zipkin-base)
+[![zipkin-cassandra](https://quay.io/repository/openzipkin/zipkin-cassandra/status "zipkin-cassandra")](https://quay.io/repository/openzipkin/zipkin-cassandra)
+[![zipkin-collector](https://quay.io/repository/openzipkin/zipkin-collector/status "zipkin-collector")](https://quay.io/repository/openzipkin/zipkin-collector)
+[![zipkin-query](https://quay.io/repository/openzipkin/zipkin-query/status "zipkin-query")](https://quay.io/repository/openzipkin/zipkin-query)
+[![zipkin-web](https://quay.io/repository/openzipkin/zipkin-web/status "zipkin-web")](https://quay.io/repository/openzipkin/zipkin-web)
+
 Dockerfiles for starting a Zipkin instance backed by Cassandra. Automatically built images are available on Quay.io
 under the [OpenZipkin](https://quay.io/organization/openzipkin) organization, and are mirrored to
 [Docker Hub](https://hub.docker.com/u/openzipkin/).

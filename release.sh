@@ -30,7 +30,7 @@ api="https://quay.io/api/v1"
 started_at=$($date +%s)
 
 ## Read input and env
-version="$1"
+release_tag="$1"
 # Base images
 base_images="${BASE_IMAGES:-zipkin-base}"
 base_dirs="${BASE_DIRS:-base}"
@@ -41,6 +41,7 @@ service_dirs="${SERVICE_DIRS:-cassandra collector query web}"
 docker_organization="${DOCKER_ORGANIZATION:-openzipkin}"
 quayio_oauth2_token="$QUAYIO_OAUTH2_TOKEN"
 git_remote="${GIT_REMOTE:-origin}"
+target_git_branch="${TARGET_GIT_BRANCH:-master}"
 
 prefix() {
     while read line; do
@@ -48,19 +49,33 @@ prefix() {
     done
 }
 
+checkout-target-branch () {
+    git fetch "$git_remote" "$target_git_branch"
+    git checkout -B "$target_git_branch"
+}
+
 bump-zipkin-version () {
     local version="$1"; shift
     local images="$@"
+    local modified=false
+
     for image in $images; do
         echo "Bumping ZIPKIN_VERSION in the Dockerfile of $image..."
         dockerfile="${image}/Dockerfile"
         sed -i.bak -e "s/ENV ZIPKIN_VERSION .*/ENV ZIPKIN_VERSION ${version}/" "$dockerfile"
+        if ! diff "${dockerfile}.bak" "${dockerfile}" > /dev/null; then
+            modified=true
+        fi
         rm "${dockerfile}.bak"
         git add "$dockerfile"
     done
 
-    git commit -m "Bump ZIPKIN_VERSION to $version"
-    git push
+    if "$modified"; then
+        git commit -m "Bump ZIPKIN_VERSION to $version"
+        git push
+    else
+        echo "ZIPKIN_VERSION was already ${version} of the base image, no commit to make"
+    fi
 }
 
 create-and-push-tag () {
@@ -169,16 +184,26 @@ sync-quay-tags () {
 bump-dockerfiles () {
     local tag="$1"; shift
     local images="$@"
+    local modified=false
+
     for image in $images; do
         echo "Bumping base image of $image to $tag"
         dockerfile="${image}/Dockerfile"
         FROM_line_without_tag="$(grep -E '^FROM ' "$dockerfile" | cut -f1 -d:)"
         sed -i.bak -e "s~^FROM .*~${FROM_line_without_tag}:${tag}~" "$dockerfile"
+        if ! diff "${dockerfile}.bak" "${dockerfile}" > /dev/null; then
+            modified=true
+        fi
         rm "${dockerfile}.bak"
         git add "$dockerfile"
     done
-    git commit -m "Bump base image version of services to ${tag}"
-    git push
+
+    if "$modified"; then
+        git commit -m "Bump base image version of services to ${tag}"
+        git push
+    else
+        echo "Dockerfiles were already pinned to version ${tag} of the base image, no commit to make"
+    fi
 }
 
 sync-to-dockerhub () {
@@ -196,11 +221,13 @@ sync-to-dockerhub () {
 
 main () {
     # Check that the version is something we like
-    if ! echo "$version" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' -q; then
-        echo "Usage: $0 <version>"
-        echo "Where version must be <major>.<minor>.<subminor>"
+    if ! echo "$release_tag" | grep -E '^release-[0-9]+\.[0-9]+\.[0-9]+$' -q; then
+        echo "Usage: $0 <release_tag>"
+        echo "Where release_tag must be release-<major>.<minor>.<subminor>"
         exit 1
     fi
+
+    version="$(echo ${release_tag} | sed -e 's/^release-//')"
 
     # The git tags we'll create
     major_tag=$(echo "$version" | cut -f1 -d. -s)
@@ -209,6 +236,7 @@ main () {
     base_tag="base-$version"
 
     action_plan="
+    checkout-target-branch                                                      2>&1 | prefix checkout-target-branch
     bump-zipkin-version     $version $base_dirs                                 2>&1 | prefix bump-zipkin-version
     create-and-push-tag     $base_tag                                           2>&1 | prefix tag-base-image
     wait-for-builds         $base_tag $base_images                              2>&1 | prefix wait-for-base-build
@@ -223,7 +251,7 @@ main () {
     "
 
     echo "Starting release $version. Action plan:"
-    echo "$action_plan" | sed -e 's/ *2>&1 \| prefix.*//'
+    echo "$action_plan" | sed -e 's/ *2>&1.*//'
 
     eval "$action_plan"
 
