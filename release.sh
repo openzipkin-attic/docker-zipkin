@@ -2,9 +2,32 @@
 
 set -ueo pipefail
 
+# Check the environment
+if ! which jq >/dev/null 2>/dev/null; then
+    echo "The release script requires jq (https://stedolan.github.io/jq/) to run."
+    echo "Ideas: "
+    echo
+    echo "    brew install jq"
+    echo "    apt-get install jq"
+    exit 1
+fi
+
+if [[ "$(uname)" == 'Darwin' ]]; then
+    if ! which gdate >/dev/null 2>/dev/null; then
+        echo "It appears you're on OSX and don't have GNU Coreutils installed, which is required by this release script."
+        echo "Please install it and re-run this script:"
+        echo
+        echo "    brew install coreutils"
+        exit 1
+    fi
+    date=gdate
+else
+    date=date
+fi
+
 # Constants
 api="https://quay.io/api/v1"
-started_at=$(date +%s)
+started_at=$($date +%s)
 
 ## Read input and env
 version="$1"
@@ -21,7 +44,7 @@ git_remote="${GIT_REMOTE:-origin}"
 
 prefix() {
     while read line; do
-        echo "[$(date +"%x %T")][${1}] $line"
+        echo "[$($date +"%x %T")][${1}] $line"
     done
 }
 
@@ -59,7 +82,7 @@ build-started-after-me () {
     local build="$1"
 
     build_started_at_str="$(echo "$build" | jq '.started' -r)"
-    build_started_at="$(date --date "$build_started_at_str" +%s)"
+    build_started_at="$($date --date "$build_started_at_str" +%s)"
     [[ "$started_at" -lt "$build_started_at" ]] || return 1
 }
 
