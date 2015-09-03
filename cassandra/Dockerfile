@@ -1,4 +1,4 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.4.1
+FROM quay.io/openzipkin/zipkin-base:base-1.4.2
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ADD install.sh /usr/local/bin/install
