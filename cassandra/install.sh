@@ -25,7 +25,13 @@ rm cassandra*.deb
 echo "*** Starting Cassandra"
 sed -i s/Xss180k/Xss256k/ /etc/cassandra/cassandra-env.sh
 /usr/sbin/cassandra
-sleep 10
+
+timeout=300
+while ! cqlsh -e 'SHOW VERSION' localhost >/dev/null 2>/dev/null; do
+    echo "Waiting ${timeout} seconds for cassandra to come up"
+    sleep 10
+    timeout=$(($timeout - 10))
+done
 
 echo "*** Importing Scheme"
 wget https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-cassandra-core/src/main/resources/cassandra-schema-cql3.txt
