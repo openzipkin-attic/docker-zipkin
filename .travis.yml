@@ -6,6 +6,11 @@ services:
 # We don't actually use anything java, but this feels the least jarring "language"
 language: java
 
+# Even though this shouldn't be needed, one build failed because of SSH known hosts:
+# https://travis-ci.org/openzipkin/docker-zipkin/builds/78704161
+addons:
+  ssh_known_hosts: github.com
+
 # Special tags are used to trigger these Travis CI runs
 branches:
   only:
