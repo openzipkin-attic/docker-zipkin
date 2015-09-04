@@ -27,7 +27,7 @@ sed -i s/Xss180k/Xss256k/ /etc/cassandra/cassandra-env.sh
 /usr/sbin/cassandra
 
 timeout=300
-while ! cqlsh -e 'SHOW VERSION' localhost >/dev/null 2>/dev/null; do
+while [[ "$timeout" -gt 0 ]] && ! cqlsh -e 'SHOW VERSION' localhost >/dev/null 2>/dev/null; do
     echo "Waiting ${timeout} seconds for cassandra to come up"
     sleep 10
     timeout=$(($timeout - 10))
