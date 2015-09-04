@@ -170,14 +170,14 @@ sync-quay-tag () {
 }
 
 sync-quay-tags () {
-    local subminor_tag="$1"; shift
-    local minor_tag="$1"; shift
-    local major_tag="$1"; shift
+    local reference_tag="$1"; shift
+    local tags_to_move="$1"; shift
     local images="$@"
 
     for image in $images; do
-        sync-quay-tag "$image" "$subminor_tag" "$minor_tag"
-        sync-quay-tag "$image" "$subminor_tag" "$major_tag"
+        for tag_to_move in $tags_to_move; do
+            sync-quay-tag "$image" "$reference_tag" "$tag_to_move"
+        done
     done
 }
 
@@ -243,11 +243,19 @@ main () {
     bump-dockerfiles        $base_tag $service_dirs                             2>&1 | prefix bump-dockerfiles
     create-and-push-tag     $subminor_tag                                       2>&1 | prefix tag-service-images
     wait-for-builds         $subminor_tag $service_images                       2>&1 | prefix wait-for-service-builds
-    sync-quay-tags          $subminor_tag $minor_tag $major_tag $service_images 2>&1 | prefix sync-quay-tags
-    sync-to-dockerhub       $base_tag $base_images                              2>&1 | prefix sync-base-image-to-dockerhub
+    sync-quay-tags          $base_tag latest $base_images                       2>&1 | prefix sync-quay-tags-base
+    sync-quay-tags          $subminor_tag \"$minor_tag $major_tag latest\" $service_images 2>&1 | prefix sync-quay-tags
+    sync-to-dockerhub       $base_tag $base_images                              2>&1 | prefix sync-${base_tag}-to-dockerhub
+    sync-to-dockerhub       latest $base_images                                 2>&1 | prefix sync-base-latest-to-dockerhub
     sync-to-dockerhub       $subminor_tag $service_images                       2>&1 | prefix sync-${subminor_tag}-to-dockerhub
     sync-to-dockerhub       $minor_tag $service_images                          2>&1 | prefix sync-${minor_tag}-to-dockerhub
     sync-to-dockerhub       $major_tag $service_images                          2>&1 | prefix sync-${major_tag}-to-dockerhub
+    sync-to-dockerhub       latest $service_images                              2>&1 | prefix sync-latest-to-dockerhub
+    "
+
+    action_plan="
+    sync-to-dockerhub       latest $base_images                                 2>&1 | prefix sync-base-latest-to-dockerhub
+    sync-to-dockerhub       latest $service_images                              2>&1 | prefix sync-latest-to-dockerhub
     "
 
     echo "Starting release $version. Action plan:"
