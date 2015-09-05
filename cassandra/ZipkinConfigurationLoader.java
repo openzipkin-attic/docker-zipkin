@@ -1,7 +1,7 @@
 import org.apache.cassandra.config.Config;
 import org.apache.cassandra.config.ConfigurationLoader;
 import org.apache.cassandra.config.EncryptionOptions;
-import org.apache.cassandra.config.SeedProviderDef;
+import org.apache.cassandra.config.ParameterizedClass;
 import org.apache.cassandra.exceptions.ConfigurationException;
 
 import java.net.Inet4Address;
@@ -84,7 +84,7 @@ public final class ZipkinConfigurationLoader implements ConfigurationLoader {
     Map<String, String> parameters = new LinkedHashMap<>();
     parameters.put("seeds", "127.0.0.1");
     seed_provider.put("parameters", Arrays.asList(parameters));
-    config.seed_provider = new SeedProviderDef(seed_provider);
+    config.seed_provider = new ParameterizedClass(seed_provider);
     config.concurrent_reads = 32;
     config.concurrent_writes = 32;
     config.concurrent_counter_writes = 32;
