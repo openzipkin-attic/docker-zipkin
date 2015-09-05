@@ -253,11 +253,6 @@ main () {
     sync-to-dockerhub       latest $service_images                              2>&1 | prefix sync-latest-to-dockerhub
     "
 
-    action_plan="
-    sync-to-dockerhub       latest $base_images                                 2>&1 | prefix sync-base-latest-to-dockerhub
-    sync-to-dockerhub       latest $service_images                              2>&1 | prefix sync-latest-to-dockerhub
-    "
-
     echo "Starting release $version. Action plan:"
     echo "$action_plan" | sed -e 's/ *2>&1.*//'
 
