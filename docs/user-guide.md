@@ -1,8 +1,8 @@
-# Docker toolbox & docker-zipkin
+# Docker toolbox & docker-zipkin on Mac OS X
 
 ## Installation
 
-* Use VirtualBox 5.0.3+ (here: `5.0.3-102322`) ([test build downloadable here if stable is not out as you're reading this](https://www.virtualbox.org/wiki/Testbuilds)). Reason why 5.0.3+ is explained [there](https://github.com/docker/docker/issues/15712).
+* Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (`5.0.3+`).
 
 * Install [Docker Toolbox](https://www.docker.com/toolbox) (here: `1.8.1b`)
   * if the `hello world` thing at the end of the installation throws an error the docker machine might be botched (incompatible VirtualBox version etc), see the next section.
@@ -47,7 +47,7 @@ docker-machine create --driver virtualbox default
 ```
 
 
-## Docker-zipkin running
+## Running docker-zipkin
 
 After going successfully through the docker configuration, the system is ready to give that docker-zipkin project a try!
 
@@ -89,8 +89,7 @@ docker port dockerzipkin_web_1
 ```
 
 But you can't simply access these using localhost because
-> â[...] your DOCKER_HOST address is not the localhost address (0.0.0.0) but is instead the address of the your Docker VM.â
-[â source](http://docs.docker.com/installation/mac/#example-of-docker-on-mac-os-x)
+> “[...] your DOCKER_HOST address is not the localhost address (0.0.0.0) but is instead the address of the your Docker VM.” [→ source](http://docs.docker.com/installation/mac/#example-of-docker-on-mac-os-x)
 
 To get the proper ip run `docker-machine ip default` and access it on port 8080.
 
