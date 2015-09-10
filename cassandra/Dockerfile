@@ -1,7 +1,8 @@
 FROM quay.io/openzipkin/zipkin-base:base-1.6.0
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-# Logback and yaml use java.beans package not in the JRE, we are setting configuration manually and using slf4j-simple.
+# Logback and snakeyaml use java.beans package not in the JRE, we are setting configuration manually and using slf4j-simple.
+# http://jira.qos.ch/browse/LOGBACK-1071 https://bitbucket.org/asomov/snakeyaml/issues/315/make-javabeans-optional-or-not-used
 ADD ZipkinConfigurationLoader.class /cassandra/build/classes/main/ZipkinConfigurationLoader.class
 ENV CASSANDRA_VERSION=2.2.1 SLF4J_VERSION=1.7.7 \
     JAVA=/usr/local/java/jre/bin/java \
