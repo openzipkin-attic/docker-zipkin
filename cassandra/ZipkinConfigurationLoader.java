@@ -25,6 +25,7 @@ import java.util.Map;
  * maintaining this, we could switch this to use simple-json, but for now hard-coding is the
  * quickest.
  *
+ * https://bitbucket.org/asomov/snakeyaml/issues/315/make-javabeans-optional-or-not-used
  */
 public final class ZipkinConfigurationLoader implements ConfigurationLoader {
 
