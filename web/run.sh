@@ -4,6 +4,11 @@ if [[ -z $QUERY_PORT_9411_TCP_ADDR ]]; then
   exit 1
 fi
 
+if [ "$COLLECTOR_PORT_9410_TCP_ADDR" ]; then
+  export SCRIBE_HOST=$COLLECTOR_PORT_9041_TCP_ADDR
+  export SCRIBE_PORT=9041
+fi
+
 QUERY_ADDR="${QUERY_PORT_9411_TCP_ADDR}:9411"
 SERVICE_NAME="zipkin-web"
 
