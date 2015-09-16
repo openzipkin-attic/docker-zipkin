@@ -26,8 +26,8 @@ else
 fi
 
 if [ "$COLLECTOR_PORT_9410_TCP_ADDR" ]; then
-  export SCRIBE_HOST=$COLLECTOR_PORT_9041_TCP_ADDR
-  export SCRIBE_PORT=9041
+  export SCRIBE_HOST=$COLLECTOR_PORT_9410_TCP_ADDR
+  export SCRIBE_PORT=9410
 fi
 
 echo "** Starting zipkin query..."
