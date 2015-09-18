@@ -1,4 +1,4 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.8.1
+FROM quay.io/openzipkin/zipkin-base:base-1.9.0
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 # Logback and snakeyaml use java.beans package not in the JRE, we are setting configuration manually and using slf4j-simple.
