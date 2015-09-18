@@ -4,8 +4,8 @@
 
 * Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (`5.0.3+`).
 
-* Install [Docker Toolbox](https://www.docker.com/toolbox) (here: `1.8.1b`)
-  * if the `hello world` thing at the end of the installation throws an error the docker machine might be botched (incompatible VirtualBox version etc), see the next section.
+* Install [Docker Toolbox](https://www.docker.com/toolbox).
+  * if afterwards the `Docker Quickstart Terminal` doesn't work the docker machine might be botched (incompatible VirtualBox version etc), see the next section.
 
 ## Configuration of Docker
 
@@ -100,7 +100,15 @@ Zipkin's top page should come up!
 Just sync your local repo and run `docker-compose up` again.
 It will automagically download the images in the containers' docker files and run the machine.
 
-## Connecting to Cassandra directly
+## Zipkin's storage schema
+
+- [Cassandra](https://github.com/openzipkin/zipkin/blob/master/zipkin-cassandra-core/src/main/resources/cassandra-schema-cql3.txt)
+- [MySQL](https://github.com/openzipkin/zipkin/blob/master/zipkin-anormdb/src/main/resources/mysql.sql)
+- [Other anormDB supported databases](https://github.com/openzipkin/zipkin/blob/master/zipkin-anormdb/src/main/scala/com/twitter/zipkin/storage/anormdb/DB.scala) (see `install` method)
+
+## Connecting to the storage directly
+
+### Cassandra
 
 ```
 brew install cassandra
@@ -112,42 +120,3 @@ Then run the following to connect:
 cqlsh `docker-machine ip default` --cqlversion=3.2.0
 ```
 
-## Zipkin's internal storage structure (in Cassandra)
-
-```
-zipkin                 (keyspace_name)
-  annotations_index      (columnfamily_name)
-    annotation             (column_name)
-   bucket
-   trace_id
-   ts
-
-  dependencies
-    day
-    dependencies
-
-  service_name_index
-    service_name
-    bucket
-    trace_id
-    ts
-
-  service_names
-    service_name
-
-  service_span_name_index
-    service_span_name
-    trace_id
-    ts
-
-  span_names
-    bucket
-    service_name
-    span_name
-
-  traces
-    span
-    span_name
-    trace_id
-    ts
-```
