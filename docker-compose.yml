@@ -1,9 +1,9 @@
 cassandra:
-  image: quay.io/openzipkin/zipkin-cassandra:1.8.1
+  image: quay.io/openzipkin/zipkin-cassandra:1.9.0
   ports:
     - 9042:9042
 collector:
-  image: quay.io/openzipkin/zipkin-collector:1.8.1
+  image: quay.io/openzipkin/zipkin-collector:1.9.0
   environment:
     - BLOCK_ON_CASSANDRA=true
   expose:
@@ -14,7 +14,7 @@ collector:
   links:
     - cassandra:db
 query:
-  image: quay.io/openzipkin/zipkin-query:1.8.1
+  image: quay.io/openzipkin/zipkin-query:1.9.0
   environment:
     - BLOCK_ON_CASSANDRA=true
   expose:
@@ -26,7 +26,7 @@ query:
     - cassandra:db
     - collector
 web:
-  image: quay.io/openzipkin/zipkin-web:1.8.1
+  image: quay.io/openzipkin/zipkin-web:1.9.0
   ports:
     - 8080:8080
     - 9990:9990
