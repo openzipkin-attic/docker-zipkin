@@ -5,10 +5,6 @@ echo "*** Installing Cassandra"
 curl -SL http://downloads.datastax.com/community/dsc-cassandra-$CASSANDRA_VERSION-bin.tar.gz | tar xz
 mv dsc-cassandra-$CASSANDRA_VERSION/* /cassandra/
 
-# Logback and yaml use java.beans package not in the JRE, we are setting configuration manually and using slf4j-simple.
-curl -SL https://jcenter.bintray.com/org/slf4j/slf4j-simple/$SLF4J_VERSION/slf4j-simple-$SLF4J_VERSION.jar > /cassandra/lib/slf4j-simple-$SLF4J_VERSION.jar
-rm -rf /cassandra/conf /cassandra/lib/snakeyaml* /cassandra/lib/logback*
-
 echo "*** Installing Python"
 apk add python
 
