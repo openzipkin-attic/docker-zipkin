@@ -18,14 +18,14 @@ Use [docker-compose](https://docs.docker.com/compose/) by doing
 
 ## Notes
 
-Docker-Zipkin starts the services in their own container: zipkin-cassandra,
-zipkin-collector, zipkin-query, zipkin-web and only link required dependencies
+Docker-Zipkin starts each of the services in their own containers: `zipkin-cassandra`,
+`zipkin-collector`, `zipkin-query`, and `zipkin-web`, and only link required dependencies
 together.
 
-The started Zipkin instance would be backed by a single node Cassandra.
+The started Zipkin instance will be backed by a single-node Cassandra.
 
-All images with the exception of zipkin-cassandra are sharing a base image:
-zipkin-base. zipkin-base and zipkin-cassandra is built on `debian:sid`.
+All images share a base image, 
+`zipkin-base`, which is built on the Alpine-based image [`delitescere/java:8`] (https://github.com/delitescere/docker-zulu), which is much smaller than the previously used `debian:sid`-based image.
 
 ## Connecting to Span Storage
 
