@@ -1,7 +1,6 @@
-This changes the datastax distribution so that it doesn't require access to the `javax.beans` package.
+This is temporary until we have a means to change yaml at runtime, to set the container IP, etc.
 
 ```bash
-# compiling a configuration loader which doesn't use snakeyaml
 CASSANDRA_VERSION=2.2.1
 curl -L http://downloads.datastax.com/community/dsc-cassandra-$CASSANDRA_VERSION-bin.tar.gz | tar xz
 javac -classpath dsc-cassandra-$CASSANDRA_VERSION/lib/apache-cassandra-$CASSANDRA_VERSION.jar ZipkinConfigurationLoader.java
