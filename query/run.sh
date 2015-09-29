@@ -11,20 +11,6 @@ fi
 export CASSANDRA_CONTACT_POINTS
 echo "Cassandra contact points: $CASSANDRA_CONTACT_POINTS"
 
-if [[ -z $BLOCK_ON_CASSANDRA ]]; then
-  echo "Not waiting on Cassandra"
-else
-  echo "Waiting on Cassandra..."
-  hosts=$(echo $CASSANDRA_CONTACT_POINTS | tr "," "\n")
-  for host in $hosts
-  do
-    echo "Waiting for Cassandra on host $host, port 9042"
-    while ! nc -z $host 9042; do
-        sleep 1
-    done
-  done
-fi
-
 if [ "$COLLECTOR_PORT_9410_TCP_ADDR" ]; then
   export SCRIBE_HOST=$COLLECTOR_PORT_9410_TCP_ADDR
   export SCRIBE_PORT=9410

@@ -11,19 +11,5 @@ fi
 export CASSANDRA_CONTACT_POINTS
 echo "Cassandra contact points: $CASSANDRA_CONTACT_POINTS"
 
-if [[ -z $BLOCK_ON_CASSANDRA ]]; then
-	echo "Not waiting on Cassandra"
-else
-	echo "Waiting on Cassandra..."
-	hosts=$(echo $CASSANDRA_CONTACT_POINTS | tr "," "\n")
-	for host in $hosts
-	do
-		echo "Waiting for Cassandra on host $host, port 9042"
-		while ! nc -z $host 9042; do
-  			sleep 1
-		done
-	done
-fi
-
 echo "** Starting zipkin collector..."
 java -jar zipkin-collector.jar -f /collector-cassandra.scala
