@@ -1,0 +1,42 @@
+mysql:
+  image: openzipkin/zipkin-mysql:1.17.1
+  expose:
+    - 3306
+  ports:
+    - 3306:3306
+collector:
+  image: openzipkin/zipkin-collector:1.17.1
+  environment:
+    - MYSQL_USER=zipkin
+    - MYSQL_PASS=zipkin
+  entrypoint: /bin/sh
+  command: -c "MYSQL_HOST=${MYSQL_PORT_3306_TCP_ADDR} java -jar /zipkin/zipkin-collector.jar -f /collector-mysql.scala"
+  expose:
+    - 9410
+  ports:
+    - 9410:9410
+  links:
+    - mysql
+query:
+  image: openzipkin/zipkin-query:1.17.1
+  environment:
+    - MYSQL_USER=zipkin
+    - MYSQL_PASS=zipkin
+  entrypoint: /bin/sh
+  command: -c "MYSQL_HOST=${MYSQL_PORT_3306_TCP_ADDR} SCRIBE_HOST=${COLLECTOR_PORT_9410_TCP_ADDR} SCRIBE_PORT=9410 java -jar /zipkin/zipkin-query.jar -f /query-mysql.scala"
+  expose:
+    - 9411
+  ports:
+    - 9411:9411
+  links:
+    - mysql
+    - collector
+web:
+  image: openzipkin/zipkin-web:1.17.1
+  ports:
+    - 8080:8080
+    - 9990:9990
+  links:
+    - collector
+    - query
+
