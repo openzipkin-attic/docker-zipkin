@@ -35,8 +35,8 @@ release_tag="$1"
 base_images="${BASE_IMAGES:-zipkin-base}"
 base_dirs="${BASE_DIRS:-base}"
 # Service images
-service_images="${SERVICE_IMAGES:-zipkin-cassandra zipkin-collector zipkin-query zipkin-web}"
-service_dirs="${SERVICE_DIRS:-cassandra collector query web}"
+service_images="${SERVICE_IMAGES:-zipkin-cassandra zipkin-mysql zipkin-collector zipkin-query zipkin-web}"
+service_dirs="${SERVICE_DIRS:-cassandra mysql collector query web}"
 # Remotes, auth
 docker_organization="${DOCKER_ORGANIZATION:-openzipkin}"
 quayio_oauth2_token="$QUAYIO_OAUTH2_TOKEN"
