@@ -7,4 +7,7 @@ ENV ZIPKIN_REPO https://jcenter.bintray.com
 ENV ZIPKIN_VERSION 1.17.1
 
 RUN mkdir /zipkin
+ADD .cassandra_profile /zipkin/.cassandra_profile
+ADD .mysql_profile /zipkin/.mysql_profile
+
 WORKDIR /zipkin
