@@ -1,28 +1,32 @@
 cassandra:
-  image: openzipkin/zipkin-cassandra:1.17.0
+  image: openzipkin/zipkin-cassandra:1.17.1
   ports:
     - 9042:9042
 collector:
-  image: openzipkin/zipkin-collector:1.17.0
+  image: openzipkin/zipkin-collector:1.17.1
+  environment:
+    - STORAGE_TYPE=cassandra
   expose:
     - 9410
   ports:
     - 9410:9410
     - 9900:9900
   links:
-    - cassandra:db
+    - cassandra:storage
 query:
-  image: openzipkin/zipkin-query:1.17.0
+  image: openzipkin/zipkin-query:1.17.1
+  environment:
+    - STORAGE_TYPE=cassandra
   expose:
     - 9411
   ports:
     - 9411:9411
     - 9901:9901
   links:
-    - cassandra:db
+    - cassandra:storage
     - collector
 web:
-  image: openzipkin/zipkin-web:1.17.0
+  image: openzipkin/zipkin-web:1.17.1
   ports:
     - 8080:8080
     - 9990:9990
