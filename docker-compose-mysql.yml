@@ -1,9 +1,9 @@
 mysql:
-  image: openzipkin/zipkin-mysql:1.17.1
+  image: openzipkin/zipkin-mysql:1.17.2
   ports:
     - 3306:3306
 collector:
-  image: openzipkin/zipkin-collector:1.17.1
+  image: openzipkin/zipkin-collector:1.17.2
   environment:
     - STORAGE_TYPE=mysql
   expose:
@@ -14,7 +14,7 @@ collector:
   links:
     - mysql:storage
 query:
-  image: openzipkin/zipkin-query:1.17.1
+  image: openzipkin/zipkin-query:1.17.2
   environment:
     - STORAGE_TYPE=mysql
   expose:
@@ -26,7 +26,7 @@ query:
     - mysql:storage
     - collector
 web:
-  image: openzipkin/zipkin-web:1.17.1
+  image: openzipkin/zipkin-web:1.17.2
   ports:
     - 8080:8080
     - 9990:9990
