@@ -1,4 +1,4 @@
-FROM delitescere/jdk:8
+FROM openzipkin/jre-full:1.8.0_60
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 RUN apk update && apk add netcat-openbsd curl
