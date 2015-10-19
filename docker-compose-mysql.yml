@@ -5,6 +5,7 @@ mysql:
 collector:
   image: openzipkin/zipkin-collector:1.17.2
   environment:
+    - TRANSPORT_TYPE=scribe
     - STORAGE_TYPE=mysql
   expose:
     - 9410
@@ -16,6 +17,7 @@ collector:
 query:
   image: openzipkin/zipkin-query:1.17.2
   environment:
+    - TRANSPORT_TYPE=scribe
     - STORAGE_TYPE=mysql
   expose:
     - 9411
@@ -27,6 +29,8 @@ query:
     - collector
 web:
   image: openzipkin/zipkin-web:1.17.2
+  environment:
+    - TRANSPORT_TYPE=scribe
   ports:
     - 8080:8080
     - 9990:9990
