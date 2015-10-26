@@ -17,6 +17,7 @@ collector:
 query:
   image: openzipkin/zipkin-query:1.18.1
   environment:
+    # Remove TRANSPORT_TYPE and unlink collector to disable tracing
     - TRANSPORT_TYPE=scribe
     - STORAGE_TYPE=cassandra
   expose:
@@ -30,6 +31,7 @@ query:
 web:
   image: openzipkin/zipkin-web:1.18.1
   environment:
+    # Remove TRANSPORT_TYPE and unlink collector to disable tracing
     - TRANSPORT_TYPE=scribe
   ports:
     - 8080:8080
