@@ -4,7 +4,7 @@ if [[ -z $QUERY_PORT_9411_TCP_ADDR ]]; then
   exit 1
 fi
 
-source .${TRANSPORT_TYPE}_profile
+test -n "$TRANSPORT_TYPE" && source .${TRANSPORT_TYPE}_profile
 
 QUERY_ADDR="${QUERY_PORT_9411_TCP_ADDR}:9411"
 SERVICE_NAME="zipkin-web"
