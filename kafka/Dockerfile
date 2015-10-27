@@ -1,4 +1,4 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.19.0
+FROM quay.io/openzipkin/zipkin-base:base-1.19.1
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV SCALA_VERSION 2.11
