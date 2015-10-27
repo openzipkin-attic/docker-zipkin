@@ -1,9 +1,9 @@
 cassandra:
-  image: openzipkin/zipkin-cassandra:1.18.1
+  image: openzipkin/zipkin-cassandra:1.19.1
   ports:
     - 9042:9042
 collector:
-  image: openzipkin/zipkin-collector:1.18.1
+  image: openzipkin/zipkin-collector:1.19.1
   environment:
     - TRANSPORT_TYPE=scribe
     - STORAGE_TYPE=cassandra
@@ -15,7 +15,7 @@ collector:
   links:
     - cassandra:storage
 query:
-  image: openzipkin/zipkin-query:1.18.1
+  image: openzipkin/zipkin-query:1.19.1
   environment:
     # Remove TRANSPORT_TYPE and unlink collector to disable tracing
     - TRANSPORT_TYPE=scribe
@@ -29,7 +29,7 @@ query:
     - cassandra:storage
     - collector
 web:
-  image: openzipkin/zipkin-web:1.18.1
+  image: openzipkin/zipkin-web:1.19.1
   environment:
     # Remove TRANSPORT_TYPE and unlink collector to disable tracing
     - TRANSPORT_TYPE=scribe
