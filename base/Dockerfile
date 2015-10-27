@@ -8,6 +8,7 @@ ENV ZIPKIN_VERSION 1.19.1
 
 RUN mkdir /zipkin
 ADD .cassandra_profile /zipkin/.cassandra_profile
+ADD .http_profile /zipkin/.http_profile
 ADD .kafka_profile /zipkin/.kafka_profile
 ADD .mysql_profile /zipkin/.mysql_profile
 ADD .scribe_profile /zipkin/.scribe_profile
