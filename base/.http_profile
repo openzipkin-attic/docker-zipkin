@@ -1,0 +1,3 @@
+# Currently, http transport isn't parameterized as zipkin-web explictly uses the
+# zipkin-query host, and zipkin-query logs locally. In the future, we may want
+# to parameterize this, for example, to test load balanced http listeners.
