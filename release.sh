@@ -215,8 +215,26 @@ sync-to-dockerhub () {
         echo "Syncing ${quay_name} to Docker Hub as ${dockerhub_name}"
         docker pull "$quay_name"
         docker tag -f "$quay_name" "$dockerhub_name"
-        docker push "$dockerhub_name"
+        retry 3 docker push "$dockerhub_name"
     done
+}
+
+retry () {
+    local limit="$1"; shift
+    local cmd="$@"
+    local tries=1
+    while [[ $tries -lt $limit ]]; do
+        if ! $cmd; then
+            tries=$(($tries + 1))
+            echo "\"$cmd\" failed, try $tries/$limit coming up"
+        else
+            break
+        fi
+    done
+    if [[ $tries -eq $limit ]]; then
+        echo "\"$cmd\" failed $limit times, aborting."
+        return 1
+    fi
 }
 
 main () {
