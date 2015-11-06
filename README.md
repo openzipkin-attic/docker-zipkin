@@ -16,6 +16,10 @@ under the [OpenZipkin](https://quay.io/organization/openzipkin) organization, an
 Use [docker-compose](https://docs.docker.com/compose/) by doing
 `docker-compose up`.
 
+See the ui at (docker ip):8080
+
+In the ui - click zipkin-query, then click "Find Traces"
+
 ## Notes
 
 Docker-Zipkin starts each of the services in their own containers: `zipkin-cassandra`,
