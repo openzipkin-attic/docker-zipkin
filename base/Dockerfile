@@ -12,5 +12,6 @@ ADD .http_profile /zipkin/.http_profile
 ADD .kafka_profile /zipkin/.kafka_profile
 ADD .mysql_profile /zipkin/.mysql_profile
 ADD .scribe_profile /zipkin/.scribe_profile
+ADD .redis_profile /zipkin/.redis_profile
 
 WORKDIR /zipkin
