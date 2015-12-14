@@ -14,4 +14,4 @@ ROOTURL="-zipkin.web.rootUrl=${ROOTURL:-DEFAULT_ROOTURL}"
 
 echo "** Starting zipkin web..."
 # cacheResources implies serving web assets from the jar, as opposed to a local filesystem path
-java -jar zipkin-web.jar -zipkin.web.cacheResources=true -zipkin.web.query.dest=${QUERY_ADDR} ${ROOTURL}
+exec java -jar zipkin-web.jar -zipkin.web.cacheResources=true -zipkin.web.query.dest=${QUERY_ADDR} ${ROOTURL}
