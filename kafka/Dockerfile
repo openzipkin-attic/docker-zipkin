@@ -2,7 +2,7 @@ FROM quay.io/openzipkin/zipkin-base:base-1.25.3
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV SCALA_VERSION 2.11
-ENV KAFKA_VERSION 0.8.2.2
+ENV KAFKA_VERSION 0.9.0.0
 ENV ZOOKEEPER_VERSION 3.4.7
 
 WORKDIR /kafka
