@@ -4,7 +4,7 @@ MAINTAINER OpenZipkin "http://zipkin.io/"
 RUN apk update && apk add curl
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
-ENV ZIPKIN_VERSION 1.25.3
+ENV ZIPKIN_VERSION 1.26.0
 
 RUN mkdir /zipkin
 ADD .cassandra_profile /zipkin/.cassandra_profile
