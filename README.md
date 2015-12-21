@@ -31,6 +31,8 @@ The started Zipkin instance will be backed by a single-node Cassandra.
 All images share a base image, 
 `zipkin-base`, which is built on the Alpine-based image [`delitescere/java:8`] (https://github.com/delitescere/docker-zulu), which is much smaller than the previously used `debian:sid`-based image.
 
+`zipkin-collector`, `zipkin-query`, and `zipkin-web` honor the environment variable `JAVA_OPTS`, which can be used to set heap size, trust store location or other JVM system properties.
+
 ## Connecting to Span Storage
 
 `zipkin-collector` and `zipkin-query` store and retrieve spans from Cassandra, using its native protocol. Specify a list of one or more Cassandra nodes listening on port 9042, via the comma-separated environment variable `CASSANDRA_CONTACT_POINTS`.
