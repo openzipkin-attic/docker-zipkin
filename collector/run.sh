@@ -5,4 +5,4 @@ source .${STORAGE_TYPE}_profile
 test "$TRANSPORT_TYPE" != 'scribe' && source .${TRANSPORT_TYPE}_profile
 
 echo "** Starting zipkin collector..."
-exec java -jar zipkin-collector.jar -f /collector-${STORAGE_TYPE}.scala
+exec java ${JAVA_OPTS} -jar zipkin-collector.jar -f /collector-${STORAGE_TYPE}.scala

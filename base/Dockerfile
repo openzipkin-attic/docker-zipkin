@@ -5,6 +5,9 @@ RUN apk update && apk add curl
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
 ENV ZIPKIN_VERSION 1.26.0
+# Use to set heap, trust store or other system properties.
+# Intentionally defaulted to empty string.
+ENV JAVA_OPTS=
 
 RUN mkdir /zipkin
 ADD .cassandra_profile /zipkin/.cassandra_profile
