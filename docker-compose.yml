@@ -10,7 +10,11 @@ collector:
     - TRANSPORT_TYPE=scribe
     - STORAGE_TYPE=cassandra
   expose:
+    # The scribe thrift api listens on this port
     - 9410
+    # Admin interface is under the http path /admin
+    # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
+    - 9900
   ports:
     - 9410:9410
     - 9900:9900
@@ -25,7 +29,11 @@ query:
     - TRANSPORT_TYPE=http
     - STORAGE_TYPE=cassandra
   expose:
+    # The http api is mounted at /api/v1
     - 9411
+    # Admin interface is under the http path /admin
+    # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
+    - 9901
   ports:
     - 9411:9411
     - 9901:9901
@@ -36,6 +44,12 @@ web:
   environment:
     # Remove TRANSPORT_TYPE to disable tracing
     - TRANSPORT_TYPE=http
+  expose:
+    # Web UI is mounted at the root, and the http api under /api/v1
+    - 8080
+    # Admin interface is under the http path /admin
+    # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
+    - 9990
   ports:
     - 8080:8080
     - 9990:9990
