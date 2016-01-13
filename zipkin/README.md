@@ -8,8 +8,8 @@ This repository contains the Docker build definition and release process for
 java port of zipkin, which was historically written in scala+finagle.
 
 Automatically built images are available on Quay.io
-under the [OpenZipkin](https://quay.io/organization/openzipkin) organization, and are mirrored to
-[Docker Hub](https://hub.docker.com/u/openzipkin/)
+as [quay.io/openzipkin/zipkin-java](https://quay.io/repository/openzipkin/zipkin-java), and are mirrored to
+Docker Hub as [openzipkin/zipkin-java](https://hub.docker.com/r/openzipkin/zipkin-java/).
 
 ## Running
 
