@@ -17,7 +17,7 @@ mysql:
   ports:
     - 3306:3306
 query:
-  image: openzipkin/zipkin-java:0.0.1
+  image: openzipkin/zipkin-java:0.0.2
   environment:
     - STORAGE_TYPE=mysql
   expose:
