@@ -10,3 +10,12 @@ java port of zipkin, which was historically written in scala+finagle.
 Automatically built images are available on Quay.io
 under the [OpenZipkin](https://quay.io/organization/openzipkin) organization, and are mirrored to
 [Docker Hub](https://hub.docker.com/u/openzipkin/)
+
+## Running
+
+Use [docker-compose](https://docs.docker.com/compose/) by doing
+`docker-compose up`.
+
+See the ui at (docker ip):8080
+
+In the ui - click zipkin-query, then click "Find Traces".

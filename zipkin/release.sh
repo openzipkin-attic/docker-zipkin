@@ -196,6 +196,12 @@ main () {
     echo "$action_plan" | sed -e 's/ *2>&1.*//'
 
     eval "$action_plan"
+
+    echo
+    echo "All done. Now it's time to update docker-compose.yml with the new version and validate that the new image works."
+    echo "Once you're done with that:"
+    echo
+    echo "    git commit docker-compose.yml -m 'Release $version'; git push"
 }
 
 main

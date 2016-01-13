@@ -19,8 +19,9 @@ level of version pinning they prefer.
 
 1. **Test the new images**
 
-   Locally change `docker-compose.yml` to use the newly built versions (the tag will be something like `1.4.1`),
-   execute `docker-compose up`, and verify that all is well with the world.
+   Locally change `docker-compose.yml` to use the newly built version in the
+   container `query` (the tag will be something like `1.4.1`), execute
+   `docker-compose up`, and verify that all is well with the world.
 
 1. **Commit, push `docker-compose.yml`**
 
