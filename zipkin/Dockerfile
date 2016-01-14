@@ -12,11 +12,11 @@
 # the License.
 #
 
-FROM openzipkin/zipkin-base:base-1.29.0
+FROM openzipkin/zipkin-base:base-1.30.0
 
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.3.0
+ENV ZIPKIN_JAVA_VERSION 0.4.1
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 VOLUME /tmp
@@ -27,4 +27,3 @@ RUN unzip zipkin-server.jar
 EXPOSE 9411
 
 CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -cp '.:lib/*' io.zipkin.server.ZipkinServer
-
