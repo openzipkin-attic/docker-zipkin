@@ -19,3 +19,10 @@ Use [docker-compose](https://docs.docker.com/compose/) by doing
 See the ui at (docker ip):8080
 
 In the ui - click zipkin-query, then click "Find Traces".
+
+## Configuration
+Configuration is via environment variables, defined by [zipkin-java-server](https://github.com/openzipkin/zipkin-java/blob/master/zipkin-java-server/README.md).
+
+In docker, the following can also be set:
+
+    * `JAVA_OPTS`: Use to set java arguments, such as heap size or trust store location.
