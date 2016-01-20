@@ -16,11 +16,11 @@ FROM openzipkin/zipkin-base:base-1.30.0
 
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.4.1
+ENV ZIPKIN_JAVA_VERSION 0.4.3
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 VOLUME /tmp
-RUN curl -SL $ZIPKIN_REPO/io/zipkin/zipkin-java-server/$ZIPKIN_JAVA_VERSION/zipkin-java-server-$ZIPKIN_JAVA_VERSION-exec.jar > zipkin-server.jar
+RUN curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_JAVA_VERSION/zipkin-server-$ZIPKIN_JAVA_VERSION-exec.jar > zipkin-server.jar
 
 RUN unzip zipkin-server.jar
 
