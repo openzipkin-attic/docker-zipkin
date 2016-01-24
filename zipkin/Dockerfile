@@ -26,4 +26,4 @@ RUN unzip zipkin-server.jar
 
 EXPOSE 9411
 
-CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -cp '.:lib/*' io.zipkin.server.ZipkinServer
+CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -cp '.:lib/*' zipkin.server.ZipkinServer
