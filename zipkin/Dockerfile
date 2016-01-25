@@ -12,11 +12,11 @@
 # the License.
 #
 
-FROM openzipkin/zipkin-base:base-1.30.0
+FROM openzipkin/zipkin-base:base-1.30.2
 
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.4.3
+ENV ZIPKIN_JAVA_VERSION 0.4.4
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 VOLUME /tmp
