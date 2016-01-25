@@ -20,8 +20,6 @@ query:
   image: openzipkin/zipkin-java:0.4.4
   environment:
     - STORAGE_TYPE=mysql
-  expose:
-    - 9411
   ports:
     - 9411:9411
   links:
@@ -32,7 +30,6 @@ web:
     - 8080:8080
   environment:
     - TRANSPORT_TYPE=http
-    - WEB_LOG_LEVEL=DEBUG
   links:
     - query
 
