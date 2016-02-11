@@ -1,4 +1,4 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.32.3
+FROM quay.io/openzipkin/zipkin-base:base-1.33.0
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 # Temporarily hard-code zipkin's configuration to a class that looks up the container's IP
