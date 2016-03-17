@@ -17,7 +17,7 @@ cassandra:
   ports:
     - 9042:9042
 query:
-  image: openzipkin/zipkin-java:0.7.0
+  image: openzipkin/zipkin-java:0.8.0
   environment:
     - STORAGE_TYPE=cassandra
   ports:
