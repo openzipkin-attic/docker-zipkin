@@ -13,7 +13,7 @@
 #
 
 mysql:
-  image: openzipkin/zipkin-mysql:1.36.0
+  image: openzipkin/zipkin-mysql:1.38.0
   ports:
     - 3306:3306
 query:
@@ -21,15 +21,9 @@ query:
   environment:
     - STORAGE_TYPE=mysql
   ports:
+    # Historical port used for the Zipkin HTTP Api
     - 9411:9411
+    # Zipkin UI used to be on a separate process listening on port 8080
+    - 8080:9411
   links:
     - mysql:storage
-web:
-  image: openzipkin/zipkin-web:1.36.0
-  ports:
-    - 8080:8080
-  environment:
-    - TRANSPORT_TYPE=http
-  links:
-    - query
-
