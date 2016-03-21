@@ -16,7 +16,7 @@ FROM openzipkin/zipkin-base:base-1.38.1
 
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.9.1
+ENV ZIPKIN_JAVA_VERSION 0.9.2
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 VOLUME /tmp
