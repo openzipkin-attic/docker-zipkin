@@ -13,7 +13,7 @@
 #
 
 cassandra:
-  image: openzipkin/zipkin-cassandra:1.38.0
+  image: openzipkin/zipkin-cassandra:1.38.1
   ports:
     - 9042:9042
 query:
