@@ -21,7 +21,7 @@ See the ui at (docker ip):8080
 In the ui - click zipkin-query, then click "Find Traces".
 
 ## Configuration
-Configuration is via environment variables, defined by [zipkin-java-server](https://github.com/openzipkin/zipkin-java/blob/master/zipkin-java-server/README.md).
+Configuration is via environment variables, defined by [zipkin-server](https://github.com/openzipkin/zipkin-java/blob/master/zipkin-server/README.md).
 
 In docker, the following can also be set:
 
