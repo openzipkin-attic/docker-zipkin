@@ -11,22 +11,38 @@ Dockerfiles for starting a Zipkin instance backed by Cassandra. Automatically bu
 under the [OpenZipkin](https://quay.io/organization/openzipkin) organization, and are mirrored to
 [Docker Hub](https://hub.docker.com/u/openzipkin/).
 
-## Running
+## docker-compose
 
-Use [docker-compose](https://docs.docker.com/compose/) by doing
-`docker-compose up`.
+This project is configured to run docker containers using
+[docker-compose](https://docs.docker.com/compose/).
+
+To start the default docker-compose configuration, run:
+
+    $ docker-compose up
 
 See the ui at (docker ip):8080
 
 In the ui - click zipkin-query, then click "Find Traces"
 
+### Cassandra
+
+The default docker-compose configuration defined in `docker-compose.yml` is
+backed by a single-node Cassandra. This configuration starts each of the Zipkin
+services in their own containers: `zipkin-cassandra`, `zipkin-collector`,
+`zipkin-query`, and `zipkin-web`, and only links required dependencies together.
+
+### MySQL
+
+The docker-compose configuration can be extended to use MySQL instead of
+Cassandra, using the `docker-compose-mysql.yml` file. That file employs
+[docker-compose overrides](https://docs.docker.com/compose/extends/#multiple-compose-files)
+to swap out one storage container for another.
+
+To start the MySQL-backed configuration, run:
+
+    $ docker-compose -f docker-compose.yml -f docker-compose-mysql.yml up
+
 ## Notes
-
-Docker-Zipkin starts each of the services in their own containers: `zipkin-cassandra`,
-`zipkin-collector`, `zipkin-query`, and `zipkin-web`, and only link required dependencies
-together.
-
-The started Zipkin instance will be backed by a single-node Cassandra.
 
 All images share a base image, 
 `zipkin-base`, which is built on the Alpine-based image [`delitescere/java:8`] (https://github.com/delitescere/docker-zulu), which is much smaller than the previously used `debian:sid`-based image.

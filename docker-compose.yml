@@ -1,7 +1,8 @@
-cassandra:
+storage:
   image: openzipkin/zipkin-cassandra:1.37.0
   ports:
     - 9042:9042
+
 # The collector process is used for legacy zipkin instrumentation, which log via
 # scribe. It can also poll kafka, when the KAFKA_ZOOKEEPER variable is set.
 collector:
@@ -19,7 +20,8 @@ collector:
     - 9410:9410
     - 9900:9900
   links:
-    - cassandra:storage
+    - storage
+
 # The query process services the UI, and also exposes a POST endpoint that
 # instrumentation can send trace data to.
 query:
@@ -38,7 +40,8 @@ query:
     - 9411:9411
     - 9901:9901
   links:
-    - cassandra:storage
+    - storage
+
 web:
   image: openzipkin/zipkin-web:1.37.0
   environment:
