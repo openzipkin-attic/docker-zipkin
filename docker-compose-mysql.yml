@@ -5,12 +5,6 @@ storage:
     - 3306:3306
 
 # Switch storage type to MySQL
-collector:
-  environment:
-    - TRANSPORT_TYPE=scribe
-    - STORAGE_TYPE=mysql
-
-# Switch storage type to MySQL
 query:
   environment:
     - TRANSPORT_TYPE=http

@@ -28,8 +28,8 @@ In the ui - click zipkin-query, then click "Find Traces"
 
 The default docker-compose configuration defined in `docker-compose.yml` is
 backed by a single-node Cassandra. This configuration starts each of the Zipkin
-services in their own containers: `zipkin-cassandra`, `zipkin-collector`,
-`zipkin-query`, and `zipkin-web`, and only links required dependencies together.
+services in their own containers: `zipkin-cassandra`, `zipkin-query`, and
+`zipkin-web`, and only links required dependencies together.
 
 ### MySQL
 
