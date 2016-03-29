@@ -1,11 +1,24 @@
-# Run MySQL instead of Cassandra
-storage:
-  image: openzipkin/zipkin-mysql:1.37.0
-  ports:
-    - 3306:3306
+# This file uses the version 2 docker-compose file format, described here:
+# https://docs.docker.com/compose/compose-file/#version-2
+#
+# It extends the default configuration from docker-compose.yml to run the
+# zipkin-mysql container instead of the zipkin-cassandra container.
 
-# Switch storage type to MySQL
-query:
-  environment:
-    - TRANSPORT_TYPE=http
-    - STORAGE_TYPE=mysql
+version: '2'
+
+services:
+  # Run MySQL instead of Cassandra
+  storage:
+    image: openzipkin/zipkin-mysql:1.38.1
+    container_name: mysql
+    ports:
+      - 3306:3306
+
+  # Switch storage type to MySQL
+  query:
+    environment:
+      # Remove TRANSPORT_TYPE to disable tracing
+      - TRANSPORT_TYPE=http
+      - STORAGE_TYPE=mysql
+      # Point the query service at the storage backend
+      - MYSQL_HOST=mysql
