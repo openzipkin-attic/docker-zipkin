@@ -19,10 +19,8 @@ MAINTAINER OpenZipkin "http://zipkin.io/"
 ENV ZIPKIN_JAVA_VERSION 0.10.1
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
-RUN curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_JAVA_VERSION/zipkin-server-$ZIPKIN_JAVA_VERSION-exec.jar > zipkin-server.jar && \ 
-    unzip zipkin-server.jar && \
-    rm zipkin-server.jar
+ADD $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_JAVA_VERSION/zipkin-server-$ZIPKIN_JAVA_VERSION-exec.jar /zipkin/zipkin-server.jar 
 
 EXPOSE 9411
 
-CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -cp '.:lib/*' zipkin.server.ZipkinServer
+CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; java ${JAVA_OPTS} -jar zipkin-server.jar
