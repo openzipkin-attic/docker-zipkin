@@ -13,11 +13,11 @@
 #
 
 cassandra:
-  image: openzipkin/zipkin-cassandra:1.38.1
+  image: openzipkin/zipkin-cassandra:1.39.0
   ports:
     - 9042:9042
 query:
-  image: openzipkin/zipkin-java:0.9.3
+  image: openzipkin/zipkin-java:0.10.0
   environment:
     - STORAGE_TYPE=cassandra
   ports:

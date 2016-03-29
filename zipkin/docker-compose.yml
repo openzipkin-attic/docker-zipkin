@@ -13,11 +13,11 @@
 #
 
 mysql:
-  image: openzipkin/zipkin-mysql:1.38.1
+  image: openzipkin/zipkin-mysql:1.39.0
   ports:
     - 3306:3306
 query:
-  image: openzipkin/zipkin-java:0.9.3
+  image: openzipkin/zipkin-java:0.10.0
   environment:
     - STORAGE_TYPE=mysql
   ports:
