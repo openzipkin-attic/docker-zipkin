@@ -42,9 +42,20 @@ To start the MySQL-backed configuration, run:
 
     $ docker-compose -f docker-compose.yml -f docker-compose-mysql.yml up
 
+### Legacy
+
+The Cassandra and MySQL docker-compose files described above use version 2 of
+the docker-compose config file format. There is a legacy version 1 configuration
+also available, in the `docker-compose-legacy.yml` file. That configuration
+relies on container linking, and runs the legacy `zipkin-collector` container.
+
+To start the legacy configuration, run:
+
+    $ docker-compose -f docker-compose-legacy.yml up
+
 ## Notes
 
-All images share a base image, 
+All images share a base image,
 `zipkin-base`, which is built on the Alpine-based image [`delitescere/java:8`] (https://github.com/delitescere/docker-zulu), which is much smaller than the previously used `debian:sid`-based image.
 
 `zipkin-collector`, `zipkin-query`, and `zipkin-web` honor the environment variable `JAVA_OPTS`, which can be used to set heap size, trust store location or other JVM system properties.
@@ -53,7 +64,7 @@ All images share a base image,
 
 `zipkin-collector` and `zipkin-query` store and retrieve spans from Cassandra, using its native protocol. Specify a list of one or more Cassandra nodes listening on port 9042, via the comma-separated environment variable `CASSANDRA_CONTACT_POINTS`.
 
-ex. 
+ex.
 ```bash
 docker run -d -p 9410:9410 -p 9900:9900 --name="zipkin-collector" -e "CASSANDRA_CONTACT_POINTS=node1,node2,node3" "openzipkin/zipkin-collector:latest"
 ```
