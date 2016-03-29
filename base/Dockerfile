@@ -1,4 +1,4 @@
-FROM openzipkin/jre-full:1.8.0_60
+FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 RUN apk update && apk add curl
