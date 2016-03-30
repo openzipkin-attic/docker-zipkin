@@ -6,6 +6,8 @@ if [[ -z $MYSQL_HOST ]]; then
     exit 1
   fi
   MYSQL_HOST=$STORAGE_PORT_3306_TCP_ADDR
+  # When there's a container named "mysql", MYSQL_PORT will have a value like tcp://172.17.0.2:3306
+  export MYSQL_PORT=3306
 fi
 
 export MYSQL_HOST
