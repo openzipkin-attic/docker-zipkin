@@ -69,13 +69,14 @@ documented in the main Zipkin repo, as follows:
 * [zipkin-web](https://github.com/openzipkin/zipkin/blob/master/zipkin-web/README.md#configuration)
 
 Additionally, docker-specific environment variables are described below. See the
-docker-compose files for additional examples of how these variables may be set.
+docker-compose files for examples of how these variables may be set.
 
-### Storage
+### STORAGE_TYPE
 
 Both the `zipkin-query` and the `zipkin-collector` containers need to be
-configured to talk to a storage. The backend is determined by the `STORAGE_TYPE`
-environment variable, and the available values are "cassandra" or "mysql".
+configured to talk to a storage backend. The backend is determined by the
+`STORAGE_TYPE` environment variable. The currently available storage types are
+"cassandra" or "mysql".
 
 If `STORAGE_TYPE=cassandra`, then the container expects for one of these two
 additional environment variables to be set:
@@ -94,22 +95,22 @@ additional environment variables to be set:
   environment variable is typically set by linking a container running
   `zipkin-mysql` as "storage" when you start the container.
 
-### Transport
+### TRANSPORT_TYPE
 
-The `zipkin-query`, `zipkin-collector` and `zipkin-web` containers use the
+The `zipkin-query`, `zipkin-web`, and `zipkin-collector` containers use the
 `TRANSPORT_TYPE` environment variable to configure how they send and receive
 data.
 
-For the query and web containers, if `TRANSPORT_TYPE=http`, then those
-containers will send trace data via http to the `zipkin-query` service. If
-`TRANSPORT_TYPE=scribe`, then  those containers will send trace data via scribe
-to the `zipkin-collector` service. If `TRANSPORT_TYPE` is unset, then those
-containers will not trace requests that they receive.
+For the query and web containers, if `TRANSPORT_TYPE=http`, then the container
+will send trace data via http to the `zipkin-query` service. If
+`TRANSPORT_TYPE=scribe`, then  the container will send trace data via scribe to
+the `zipkin-collector` service. If `TRANSPORT_TYPE` is unset, then the container
+will not trace requests that they receive.
 
 For the collector container, if `TRANSPORT_TYPE=scribe`, then the container will
 run a scribe collector on port 9410. If `TRANSPORT_TYPE=kafka`, then the
-container will poll Kafka, and expects one of these two additional environment
-variables to be set:
+container will also poll Kafka, and expects one of these two additional
+environment variables to be set:
 
 * `KAFKA_ZOOKEEPER` -- A node and port where Zookeeper is running.
 * `KAFKA_PORT_2181_TCP_ADDR` -- A zookeeper node listening on port 2181. This
