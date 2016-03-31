@@ -16,7 +16,7 @@ FROM openzipkin/zipkin-base:base-1.39.0
 
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.10.1
+ENV ZIPKIN_JAVA_VERSION 0.10.2
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 ADD $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_JAVA_VERSION/zipkin-server-$ZIPKIN_JAVA_VERSION-exec.jar /zipkin/zipkin-server.jar 

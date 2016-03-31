@@ -12,18 +12,20 @@
 # the License.
 #
 
-cassandra:
+storage:
   image: openzipkin/zipkin-cassandra:1.39.0
+  container_name: cassandra
   ports:
     - 9042:9042
 query:
-  image: openzipkin/zipkin-java:0.10.1
+  image: openzipkin/zipkin-java:0.10.2
   environment:
     - STORAGE_TYPE=cassandra
+    - CASSANDRA_CONTACT_POINTS=cassandra
   ports:
     # Historical port used for the Zipkin HTTP Api
     - 9411:9411
     # Zipkin UI used to be on a separate process listening on port 8080
     - 8080:9411
   links:
-    - cassandra:storage
+    - storage
