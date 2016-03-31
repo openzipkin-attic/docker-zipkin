@@ -18,10 +18,11 @@ storage:
   ports:
     - 3306:3306
 query:
-  image: openzipkin/zipkin-java:0.10.2
+  image: openzipkin/zipkin-java:0.10.3
   environment:
     - STORAGE_TYPE=mysql
     - MYSQL_HOST=mysql
+    - MYSQL_PORT=3306
   ports:
     # Historical port used for the Zipkin HTTP Api
     - 9411:9411
