@@ -9,7 +9,7 @@ version: '2'
 services:
   # Run MySQL instead of Cassandra
   storage:
-    image: openzipkin/zipkin-mysql:1.39.2
+    image: openzipkin/zipkin-mysql:1.39.3
     container_name: mysql
     ports:
       - 3306:3306
