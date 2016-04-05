@@ -18,7 +18,7 @@ Use [docker-compose](https://docs.docker.com/compose/) by doing
 
 See the ui at (docker ip):8080
 
-In the ui - click zipkin-query, then click "Find Traces".
+In the ui - click zipkin-server, then click "Find Traces".
 
 ## Configuration
 Configuration is via environment variables, defined by [zipkin-server](https://github.com/openzipkin/zipkin-java/blob/master/zipkin-server/README.md).
