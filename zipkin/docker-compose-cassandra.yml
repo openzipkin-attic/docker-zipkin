@@ -16,12 +16,12 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-cassandra:1.39.3
+    image: openzipkin/zipkin-cassandra:1.39.4
     container_name: cassandra
     ports:
       - 9042:9042
   server:
-    image: openzipkin/zipkin-java:0.12.1
+    image: openzipkin/zipkin-java:0.12.2
     environment:
       - STORAGE_TYPE=cassandra
       - CASSANDRA_CONTACT_POINTS=cassandra
