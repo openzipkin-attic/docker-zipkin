@@ -8,7 +8,7 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-cassandra:1.39.4
+    image: openzipkin/zipkin-cassandra:1.39.7
     container_name: cassandra
     ports:
       - 9042:9042
@@ -16,7 +16,7 @@ services:
   # The query process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to.
   query:
-    image: openzipkin/zipkin-query:1.39.4
+    image: openzipkin/zipkin-query:1.39.7
     container_name: query
     environment:
       # Remove TRANSPORT_TYPE to disable tracing
@@ -34,7 +34,7 @@ services:
       - storage
 
   web:
-    image: openzipkin/zipkin-web:1.39.4
+    image: openzipkin/zipkin-web:1.39.7
     environment:
       # Remove TRANSPORT_TYPE to disable tracing
       - TRANSPORT_TYPE=http
