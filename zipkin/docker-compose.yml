@@ -15,15 +15,17 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-mysql:1.39.6
+    image: openzipkin/zipkin-mysql:1.39.7
     container_name: mysql
     ports:
       - 3306:3306
   server:
-    image: openzipkin/zipkin-java:0.13.0
+    image: openzipkin/zipkin-java:0.14.0
     environment:
       - STORAGE_TYPE=mysql
       - MYSQL_HOST=mysql
+      # Uncomment to disable self-tracing
+      # - SELF_TRACING_ENABLED=false
     ports:
       # Listen port for the Scribe transport
       - 9410:9410

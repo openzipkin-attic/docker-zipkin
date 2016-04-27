@@ -12,11 +12,11 @@
 # the License.
 #
 
-FROM openzipkin/zipkin-base:base-1.39.6
+FROM openzipkin/zipkin-base:base-1.39.7
 
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.13.0
+ENV ZIPKIN_JAVA_VERSION 0.14.0
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
 RUN curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_JAVA_VERSION/zipkin-server-$ZIPKIN_JAVA_VERSION-exec.jar > zipkin-server.jar && \ 

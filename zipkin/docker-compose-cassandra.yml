@@ -16,7 +16,7 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-cassandra:1.39.6
+    image: openzipkin/zipkin-cassandra:1.39.7
     container_name: cassandra
     ports:
       - 9042:9042
@@ -25,6 +25,8 @@ services:
     environment:
       - STORAGE_TYPE=cassandra
       - CASSANDRA_CONTACT_POINTS=cassandra
+      # Uncomment to disable self-tracing
+      # - SELF_TRACING_ENABLED=false
     ports:
       # Listen port for the Scribe transport
       - 9410:9410
