@@ -1,4 +1,4 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.39.7
+FROM quay.io/openzipkin/zipkin-base:base-1.39.8
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 WORKDIR /mysql
