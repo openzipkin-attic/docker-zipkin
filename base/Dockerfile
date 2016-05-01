@@ -4,7 +4,7 @@ MAINTAINER OpenZipkin "http://zipkin.io/"
 RUN apk update && apk add curl
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
-ENV ZIPKIN_VERSION 1.39.8
+ENV ZIPKIN_VERSION 1.39.9
 # Use to set heap, trust store or other system properties.
 # Intentionally defaulted to empty string.
 ENV JAVA_OPTS=
