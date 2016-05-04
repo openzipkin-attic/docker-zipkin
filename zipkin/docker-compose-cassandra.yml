@@ -21,7 +21,7 @@ services:
     ports:
       - 9042:9042
   server:
-    image: openzipkin/zipkin-java:0.16.1
+    image: openzipkin/zipkin-java:0.17.0
     environment:
       - STORAGE_TYPE=cassandra
       - CASSANDRA_CONTACT_POINTS=cassandra
