@@ -15,12 +15,12 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-mysql:1.39.8
+    image: openzipkin/zipkin-mysql:1.40.0
     container_name: mysql
     ports:
       - 3306:3306
   server:
-    image: openzipkin/zipkin-java:0.17.1
+    image: openzipkin/zipkin-java:0.18.0
     environment:
       - STORAGE_TYPE=mysql
       - MYSQL_HOST=mysql
