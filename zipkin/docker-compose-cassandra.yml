@@ -24,6 +24,7 @@ services:
     image: openzipkin/zipkin-java:0.18.0
     environment:
       - STORAGE_TYPE=cassandra
+      # When overriding this value, note the minimum supported version is 2.2
       - CASSANDRA_CONTACT_POINTS=cassandra
       # Uncomment to disable self-tracing
       # - SELF_TRACING_ENABLED=false
