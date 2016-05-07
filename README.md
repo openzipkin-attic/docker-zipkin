@@ -82,7 +82,7 @@ If `STORAGE_TYPE=cassandra`, then the container expects for one of these two
 additional environment variables to be set:
 
 * `CASSANDRA_CONTACT_POINTS` -- A comma-separated list of one or more Cassandra
-  nodes listening on port 9042.
+  nodes listening on port 9042. The minimum supported version is 2.2.
 * `STORAGE_PORT_9042_TCP_ADDR` -- A Cassandra node listening on port 9042. This
   environment variable is typically set by linking a container running
   `zipkin-cassandra` as "storage" when you start the container.
