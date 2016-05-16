@@ -11,15 +11,22 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 #
-
-FROM openzipkin/zipkin-base:base-1.40.1
-
+FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_JAVA_VERSION 0.20.1
+RUN apk add --update --no-cache curl
+
+ENV ZIPKIN_REPO https://jcenter.bintray.com
+ENV ZIPKIN_VERSION 0.20.1
+
+# Use to set heap, trust store or other system properties.
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 
-RUN curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_JAVA_VERSION/zipkin-server-$ZIPKIN_JAVA_VERSION-exec.jar > zipkin-server.jar && \ 
+# Add environment settings for supported storage types
+COPY zipkin/ /zipkin/
+WORKDIR /zipkin
+
+RUN curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_VERSION/zipkin-server-$ZIPKIN_VERSION-exec.jar > zipkin-server.jar && \
     unzip zipkin-server.jar && \
     rm zipkin-server.jar
 
