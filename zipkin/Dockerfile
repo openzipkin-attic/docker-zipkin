@@ -14,8 +14,6 @@
 FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-RUN apk add --update --no-cache curl
-
 ENV ZIPKIN_REPO https://jcenter.bintray.com
 ENV ZIPKIN_VERSION 0.20.1
 
