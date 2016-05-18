@@ -20,7 +20,7 @@ services:
     ports:
       - 3306:3306
   server:
-    image: openzipkin/zipkin-java:0.20.1
+    image: openzipkin/zipkin-java:0.21.0
     environment:
       - STORAGE_TYPE=mysql
       - MYSQL_HOST=mysql
