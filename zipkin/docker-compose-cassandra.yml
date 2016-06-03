@@ -20,8 +20,8 @@ services:
     container_name: cassandra
     ports:
       - 9042:9042
-  server:
-    image: openzipkin/zipkin-java:1.1.2
+  zipkin:
+    image: openzipkin/zipkin:1.1.2
     environment:
       - STORAGE_TYPE=cassandra
       # When overriding this value, note the minimum supported version is 2.2

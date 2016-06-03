@@ -19,14 +19,14 @@ services:
     container_name: mysql
     ports:
       - 3306:3306
-  server:
-    image: openzipkin/zipkin-java:1.1.2
+  zipkin:
+    image: openzipkin/zipkin:1.1.2
     environment:
       - STORAGE_TYPE=mysql
       - MYSQL_HOST=mysql
       # Uncomment to disable self-tracing
       # - SELF_TRACING_ENABLED=false
-      # More options, such as Kafka here: https://github.com/openzipkin/zipkin-java/blob/master/zipkin-server/README.md#environment-variables
+      # More options, such as Kafka here: https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
     ports:
       # Listen port for the Scribe transport
       - 9410:9410
