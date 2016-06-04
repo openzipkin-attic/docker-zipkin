@@ -6,62 +6,25 @@
 # wire the containers together.
 
 storage:
-  image: openzipkin/zipkin-cassandra:1.40.1
+  image: openzipkin/zipkin-cassandra:1.1.4
   ports:
     - 9042:9042
 
-# The collector process is used for legacy zipkin instrumentation, which log via
-# scribe. It can also poll kafka, when the KAFKA_ZOOKEEPER variable is set.
-collector:
-  image: openzipkin/zipkin-collector:1.40.1
+# The zipkin process services the UI, and also exposes a POST endpoint that
+# instrumentation can send trace data to. Scribe is enabled by default.
+# It can also poll kafka, when the KAFKA_ZOOKEEPER variable is set.
+zipkin:
+  image: openzipkin/zipkin:1.1.4
   environment:
-    - TRANSPORT_TYPE=scribe
     - STORAGE_TYPE=cassandra
-  expose:
-    # The scribe thrift api listens on this port
-    - 9410
-    # Admin interface is under the http path /admin
-    # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
-    - 9900
+    # Uncomment to disable self-tracing
+    # - SELF_TRACING_ENABLED=false
   ports:
+    # Listen port for the Scribe transport
     - 9410:9410
-    - 9900:9900
-  links:
-    - storage
-
-# The query process services the UI, and also exposes a POST endpoint that
-# instrumentation can send trace data to.
-query:
-  image: openzipkin/zipkin-query:1.40.1
-  environment:
-    # Remove TRANSPORT_TYPE to disable tracing
-    - TRANSPORT_TYPE=http
-    - STORAGE_TYPE=cassandra
-  expose:
-    # The http api is mounted at /api/v1
-    - 9411
-    # Admin interface is under the http path /admin
-    # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
-    - 9901
-  ports:
+    # Historical port used for the Zipkin HTTP Api
     - 9411:9411
-    - 9901:9901
+    # Zipkin UI used to be on a separate process listening on port 8080
+    - 8080:9411
   links:
     - storage
-
-web:
-  image: openzipkin/zipkin-web:1.40.1
-  environment:
-    # Remove TRANSPORT_TYPE to disable tracing
-    - TRANSPORT_TYPE=http
-  expose:
-    # Web UI is mounted at the root, and the http api under /api/v1
-    - 8080
-    # Admin interface is under the http path /admin
-    # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
-    - 9990
-  ports:
-    - 8080:8080
-    - 9990:9990
-  links:
-    - query

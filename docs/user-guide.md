@@ -74,18 +74,17 @@ Now `docker ps` should display something like
 
 ```
 CONTAINER ID        IMAGE                             COMMAND                  CREATED             STATUS              PORTS                                                       NAMES
-eaebf259371e        openzipkin/zipkin-web:1.4         "/usr/local/bin/run"     2 hours ago         Up 48 minutes       0.0.0.0:8080->8080/tcp, 0.0.0.0:9990->9990/tcp              dockerzipkin_web_1
-1ff314120b85        openzipkin/zipkin-collector:1.4   "/usr/local/bin/run.s"   2 hours ago         Up 48 minutes       0.0.0.0:9410->9410/tcp, 0.0.0.0:9900->9900/tcp              dockerzipkin_collector_1
-31053fe3e5c0        openzipkin/zipkin-query:1.4       "/usr/local/bin/run.s"   2 hours ago         Up 48 minutes       0.0.0.0:9411->9411/tcp, 0.0.0.0:9901->9901/tcp              dockerzipkin_query_1
-32dad2be5775        openzipkin/zipkin-cassandra:1.4   "/usr/local/bin/run"     2 hours ago         Up 48 minutes       7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp   dockerzipkin_cassandra_1
+568ec2927e9d        openzipkin/zipkin:1.1.4              "/bin/sh -c 'test -n "   19 seconds ago      Up 18 seconds       0.0.0.0:9410-9411->9410-9411/tcp, 0.0.0.0:8080->9411/tcp    zipkin
+2bc882b145aa        openzipkin/zipkin-cassandra:1.1.4   "/bin/sh -c /usr/loca"   19 seconds ago      Up 19 seconds       7000-7001/tcp, 7199/tcp, 9160/tcp, 0.0.0.0:9042->9042/tcp   cassandra
 ```
 
-The web part of this machinery is running on port 8080 and 9990:
+Zipkin listens on a few ports: 8080 (web ui), 9411 (http api), 9410 (scribe collector)
 
 ```sh
-docker port dockerzipkin_web_1
-# 8080/tcp -> 0.0.0.0:8080
-# 9990/tcp -> 0.0.0.0:9990
+$ docker port zipkin
+9410/tcp -> 0.0.0.0:9410
+9411/tcp -> 0.0.0.0:8080
+9411/tcp -> 0.0.0.0:9411
 ```
 
 But you can't simply access these using localhost because
@@ -102,9 +101,8 @@ It will automagically download the images in the containers' docker files and ru
 
 ## Zipkin's storage schema
 
-- [Cassandra](https://github.com/openzipkin/zipkin/blob/master/zipkin-cassandra-core/src/main/resources/cassandra-schema-cql3.txt)
-- [MySQL](https://github.com/openzipkin/zipkin/blob/master/zipkin-anormdb/src/main/resources/mysql.sql)
-- [Other anormDB supported databases](https://github.com/openzipkin/zipkin/blob/master/zipkin-anormdb/src/main/scala/com/twitter/zipkin/storage/anormdb/DB.scala) (see `install` method)
+- [Cassandra](https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/cassandra/src/main/resources/cassandra-schema-cql3.txt)
+- [MySQL](https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql/src/main/resources/mysql.sql)
 
 ## Connecting to the storage directly
 
