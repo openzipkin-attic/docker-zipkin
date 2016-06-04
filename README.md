@@ -88,5 +88,5 @@ To start the legacy configuration, run:
 ## Notes
 
 All images share a base image, `openzipkin/jre-full`, built on the Alpine image
-`delitescere/java:8`](https://github.com/delitescere/docker-zulu), which is much
+[`delitescere/java:8`](https://github.com/delitescere/docker-zulu), which is much
 smaller than the previously used `debian:sid`d image.
