@@ -1,16 +1,44 @@
 # docker-zipkin
 
 [![Build Status](https://travis-ci.org/openzipkin/docker-zipkin.svg)](https://travis-ci.org/openzipkin/docker-zipkin)
-[![zipkin-base](https://quay.io/repository/openzipkin/zipkin-base/status "zipkin-base")](https://quay.io/repository/openzipkin/zipkin-base)
+[![zipkin](https://quay.io/repository/openzipkin/zipkin/status "zipkin")](https://quay.io/repository/openzipkin/zipkin)
 [![zipkin-cassandra](https://quay.io/repository/openzipkin/zipkin-cassandra/status "zipkin-cassandra")](https://quay.io/repository/openzipkin/zipkin-cassandra)
-[![zipkin-collector](https://quay.io/repository/openzipkin/zipkin-collector/status "zipkin-collector")](https://quay.io/repository/openzipkin/zipkin-collector)
-[![zipkin-query](https://quay.io/repository/openzipkin/zipkin-query/status "zipkin-query")](https://quay.io/repository/openzipkin/zipkin-query)
-[![zipkin-web](https://quay.io/repository/openzipkin/zipkin-web/status "zipkin-web")](https://quay.io/repository/openzipkin/zipkin-web)
+[![zipkin-mysql](https://quay.io/repository/openzipkin/zipkin-mysql/status "zipkin-mysql")](https://quay.io/repository/openzipkin/zipkin-mysql)
+[![zipkin-kafka](https://quay.io/repository/openzipkin/zipkin-kafka/status "zipkin-kafka")](https://quay.io/repository/openzipkin/zipkin-kafka)
 
-This project contains Dockerfiles for producing images for each of the
-components in a full Zipkin stack.  Automatically built images are available on
-Quay.io under the [OpenZipkin](https://quay.io/organization/openzipkin) organization,
+
+This repository contains the Docker build definition and release process for
+[openzipkin/zipkin](https://github.com/openzipkin/zipkin). It also contains
+test images for transport and storage backends such as Cassandra.
+
+Automatically built images are available on Quay.io under the [OpenZipkin](https://quay.io/organization/openzipkin) organization,
 and are mirrored to [Docker Hub](https://hub.docker.com/u/openzipkin/).
+
+## Running
+
+Zipkin has no dependencies, for example you can run an in-memory zipkin server like so:
+`docker run -d -p 9411:9411 openzipkin/zipkin`
+
+See the ui at (docker ip):9411
+
+In the ui - click zipkin-server, then click "Find Traces".
+
+## Configuration
+Configuration is via environment variables, defined by [zipkin-server](https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md). Notably, you'll want to look at the `STORAGE_TYPE` environment variables, which
+include "cassandra", "mysql" and "elasticsearch".
+
+When in docker, the following environment variables also apply
+
+* `JAVA_OPTS`: Use to set java arguments, such as heap size or trust store location.
+* `STORAGE_PORT_9042_TCP_ADDR` -- A Cassandra node listening on port 9042. This
+  environment variable is typically set by linking a container running
+  `zipkin-cassandra` as "storage" when you start the container.
+* `STORAGE_PORT_3306_TCP_ADDR` -- A MySQL node listening on port 3306. This
+  environment variable is typically set by linking a container running
+  `zipkin-mysql` as "storage" when you start the container.
+* `KAFKA_PORT_2181_TCP_ADDR` -- A zookeeper node listening on port 2181. This
+  environment variable is typically set by linking a container running
+  `zipkin-kafka` as "kafka" when you start the container.
 
 ## docker-compose
 
@@ -25,15 +53,15 @@ To start the default docker-compose configuration, run:
 
 View the web UI at $(docker ip):8080.
 
-To see specific traces in the UI, select "zipkin-query" in the dropdown and
+To see specific traces in the UI, select "zipkin-server" in the dropdown and
 then click the "Find Traces" button.
 
 ### Cassandra
 
 The default docker-compose configuration defined in `docker-compose.yml` is
-backed by a single-node Cassandra. This configuration starts each of the Zipkin
-services in their own containers: `zipkin-cassandra`, `zipkin-query`, and
-`zipkin-web`, and configures required dependencies.
+backed by a single-node Cassandra. This configuration starts `zipkin` and
+`zipkin-cassandra` services in their own containers and configures required
+dependencies.
 
 ### MySQL
 
@@ -51,80 +79,14 @@ To start the MySQL-backed configuration, run:
 The Cassandra and MySQL docker-compose files described above use version 2 of
 the docker-compose config file format. There is a legacy version 1 configuration
 also available, in the `docker-compose-legacy.yml` file. That configuration
-relies on container linking, and runs the legacy `zipkin-collector` container.
+relies on container linking.
 
 To start the legacy configuration, run:
 
     $ docker-compose -f docker-compose-legacy.yml up
 
-## Runtime configuration
-
-Most runtime configuration is handled with environment variables. Some of the
-available environment variables are not docker-specific, and as such they are
-documented in the main Zipkin repo, as follows:
-
-* [zipkin-cassandra](https://github.com/openzipkin/zipkin/tree/master/zipkin-cassandra#service-configuration)
-* [zipkin-collector](https://github.com/openzipkin/zipkin/blob/master/zipkin-collector-service/README.md#configuration)
-* [zipkin-query](https://github.com/openzipkin/zipkin/blob/master/zipkin-query-service/README.md#configuration)
-* [zipkin-web](https://github.com/openzipkin/zipkin/blob/master/zipkin-web/README.md#configuration)
-
-Additionally, docker-specific environment variables are described below. See the
-docker-compose files for examples of how these variables may be set.
-
-### STORAGE_TYPE
-
-Both the `zipkin-query` and the `zipkin-collector` containers need to be
-configured to talk to a storage backend. The backend is determined by the
-`STORAGE_TYPE` environment variable. The currently available storage types are
-"cassandra" or "mysql".
-
-If `STORAGE_TYPE=cassandra`, then the container expects for one of these two
-additional environment variables to be set:
-
-* `CASSANDRA_CONTACT_POINTS` -- A comma-separated list of one or more Cassandra
-  nodes listening on port 9042. The minimum supported version is 2.2.
-* `STORAGE_PORT_9042_TCP_ADDR` -- A Cassandra node listening on port 9042. This
-  environment variable is typically set by linking a container running
-  `zipkin-cassandra` as "storage" when you start the container.
-
-If `STORAGE_TYPE=mysql`, then the container expects for one of these two
-additional environment variables to be set:
-
-* `MYSQL_HOST` -- A MySQL node listening on port 3306.
-* `STORAGE_PORT_3306_TCP_ADDR` -- A MySQL node listening on port 3306. This
-  environment variable is typically set by linking a container running
-  `zipkin-mysql` as "storage" when you start the container.
-
-### TRANSPORT_TYPE
-
-The `zipkin-query`, `zipkin-web`, and `zipkin-collector` containers use the
-`TRANSPORT_TYPE` environment variable to configure how they send and receive
-data.
-
-For the query and web containers, if `TRANSPORT_TYPE=http`, then the container
-will send trace data via http to the `zipkin-query` service. If
-`TRANSPORT_TYPE=scribe`, then  the container will send trace data via scribe to
-the `zipkin-collector` service. If `TRANSPORT_TYPE` is unset, then the container
-will not trace requests that they receive.
-
-For the collector container, if `TRANSPORT_TYPE=scribe`, then the container will
-run a scribe collector on port 9410. If `TRANSPORT_TYPE=kafka`, then the
-container will also poll Kafka, and expects one of these two additional
-environment variables to be set:
-
-* `KAFKA_ZOOKEEPER` -- A node and port where Zookeeper is running.
-* `KAFKA_PORT_2181_TCP_ADDR` -- A zookeeper node listening on port 2181. This
-  environment variable is typically set by linking a container running
-  `zipkin-kafka` as "kafka" when you start the container.
-
-### JAVA_OPTS
-
-The `zipkin-collector`, `zipkin-query`, and `zipkin-web` containers honor the
-`JAVA_OPTS` environment variable, which can be used to set heap size, trust
-store location or other JVM system properties.
-
 ## Notes
 
-All images share a base image, `zipkin-base`, which is built on the Alpine-based
-image [`delitescere/java:8`](https://github.com/delitescere/docker-zulu), which
-is much smaller than the previously used `debian:sid`-based image.
+All images share a base image, `openzipkin/jre-full`, built on the Alpine image
+`delitescere/java:8`](https://github.com/delitescere/docker-zulu), which is much
+smaller than the previously used `debian:sid`d image.

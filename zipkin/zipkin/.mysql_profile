@@ -1,6 +1,6 @@
 #!/bin/sh
 if [[ -z $MYSQL_HOST ]]; then
-  if [[ -z $STORAGE_PORT_3306_TCP_ADDR ]]; then  
+  if [[ -z $STORAGE_PORT_3306_TCP_ADDR ]]; then
     echo "** ERROR: You need to link with a MySQL container as 'storage' or specify MYSQL_HOST env var."
     echo "STORAGE_PORT_3306_TCP_ADDR (container link) or MYSQL_HOST should contain a MySQL hostname."
     exit 1

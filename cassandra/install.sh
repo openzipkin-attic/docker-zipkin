@@ -21,7 +21,7 @@ while [[ "$timeout" -gt 0 ]] && ! /cassandra/bin/cqlsh -e 'SHOW VERSION' localho
 done
 
 echo "*** Importing Scheme"
-curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-cassandra-core/src/main/resources/cassandra-schema-cql3.txt \
+curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra/src/main/resources/cassandra-schema-cql3.txt \
      | /cassandra/bin/cqlsh --debug localhost
 
 echo "*** Stopping Cassandra"

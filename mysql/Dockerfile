@@ -1,5 +1,8 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.40.2
+# Share the same base image to reduce layers used in testing
+FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
+
+ENV ZIPKIN_VERSION 1.1.4
 
 WORKDIR /mysql
 ADD install.sh /mysql/install

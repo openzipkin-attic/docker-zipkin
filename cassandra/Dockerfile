@@ -1,5 +1,8 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.40.2
+# Share the same base image to reduce layers used in testing
+FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
+
+ENV ZIPKIN_VERSION 1.1.4
 
 # Temporarily hard-code zipkin's configuration to a class that looks up the container's IP
 ADD ZipkinConfigurationLoader.class /cassandra/build/classes/main/ZipkinConfigurationLoader.class

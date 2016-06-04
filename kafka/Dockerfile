@@ -1,4 +1,5 @@
-FROM quay.io/openzipkin/zipkin-base:base-1.40.2
+# Share the same base image to reduce layers used in testing
+FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV SCALA_VERSION 2.11

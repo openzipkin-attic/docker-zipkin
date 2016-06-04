@@ -31,12 +31,9 @@ started_at=$($date +%s)
 
 ## Read input and env
 release_tag="$1"
-# Base images
-base_images="${BASE_IMAGES:-zipkin-base}"
-base_dirs="${BASE_DIRS:-base}"
 # Service images
-service_images="${SERVICE_IMAGES:-zipkin-cassandra zipkin-kafka zipkin-mysql zipkin-collector zipkin-query zipkin-web}"
-service_dirs="${SERVICE_DIRS:-cassandra kafka mysql collector query web}"
+images="${IMAGES:-zipkin-cassandra zipkin-kafka zipkin-mysql zipkin}"
+dirs="${DIRS:-cassandra kafka mysql zipkin}"
 # Remotes, auth
 docker_organization="${DOCKER_ORGANIZATION:-openzipkin}"
 quayio_oauth2_token="$QUAYIO_OAUTH2_TOKEN"
@@ -74,7 +71,7 @@ bump-zipkin-version () {
         git commit -m "Bump ZIPKIN_VERSION to $version"
         git push
     else
-        echo "ZIPKIN_VERSION was already ${version} of the base image, no commit to make"
+        echo "ZIPKIN_VERSION was already ${version}, no commit to make"
     fi
 }
 
@@ -181,31 +178,6 @@ sync-quay-tags () {
     done
 }
 
-bump-dockerfiles () {
-    local tag="$1"; shift
-    local images="$@"
-    local modified=false
-
-    for image in $images; do
-        echo "Bumping base image of $image to $tag"
-        dockerfile="${image}/Dockerfile"
-        FROM_line_without_tag="$(grep -E '^FROM ' "$dockerfile" | cut -f1 -d:)"
-        sed -i.bak -e "s~^FROM .*~${FROM_line_without_tag}:${tag}~" "$dockerfile"
-        if ! diff "${dockerfile}.bak" "${dockerfile}" > /dev/null; then
-            modified=true
-        fi
-        rm "${dockerfile}.bak"
-        git add "$dockerfile"
-    done
-
-    if "$modified"; then
-        git commit -m "Bump base image version of services to ${tag}"
-        git push
-    else
-        echo "Dockerfiles were already pinned to version ${tag} of the base image, no commit to make"
-    fi
-}
-
 sync-to-dockerhub () {
     local tag="$1"; shift
     local images="$@"
@@ -251,24 +223,17 @@ main () {
     major_tag=$(echo "$version" | cut -f1 -d. -s)
     minor_tag=$(echo "$version" | cut -f1-2 -d. -s)
     subminor_tag="$version"
-    base_tag="base-$version"
 
     action_plan="
-    checkout-target-branch                                                      2>&1 | prefix checkout-target-branch
-    bump-zipkin-version     $version $base_dirs                                 2>&1 | prefix bump-zipkin-version
-    create-and-push-tag     $base_tag                                           2>&1 | prefix tag-base-image
-    wait-for-builds         $base_tag $base_images                              2>&1 | prefix wait-for-base-build
-    bump-dockerfiles        $base_tag $service_dirs                             2>&1 | prefix bump-dockerfiles
-    create-and-push-tag     $subminor_tag                                       2>&1 | prefix tag-service-images
-    wait-for-builds         $subminor_tag $service_images                       2>&1 | prefix wait-for-service-builds
-    sync-quay-tags          $base_tag latest $base_images                       2>&1 | prefix sync-quay-tags-base
-    sync-quay-tags          $subminor_tag \"$minor_tag $major_tag latest\" $service_images 2>&1 | prefix sync-quay-tags
-    sync-to-dockerhub       $base_tag $base_images                              2>&1 | prefix sync-${base_tag}-to-dockerhub
-    sync-to-dockerhub       latest $base_images                                 2>&1 | prefix sync-base-latest-to-dockerhub
-    sync-to-dockerhub       $subminor_tag $service_images                       2>&1 | prefix sync-${subminor_tag}-to-dockerhub
-    sync-to-dockerhub       $minor_tag $service_images                          2>&1 | prefix sync-${minor_tag}-to-dockerhub
-    sync-to-dockerhub       $major_tag $service_images                          2>&1 | prefix sync-${major_tag}-to-dockerhub
-    sync-to-dockerhub       latest $service_images                              2>&1 | prefix sync-latest-to-dockerhub
+    checkout-target-branch                                                         2>&1 | prefix checkout-target-branch
+    bump-zipkin-version     $version $dirs                                         2>&1 | prefix bump-zipkin-version
+    create-and-push-tag     $subminor_tag                                          2>&1 | prefix tag-images
+    wait-for-builds         $subminor_tag $images                                  2>&1 | prefix wait-for-builds
+    sync-quay-tags          $subminor_tag \"$minor_tag $major_tag latest\" $images 2>&1 | prefix sync-quay-tags
+    sync-to-dockerhub       $subminor_tag $images                                  2>&1 | prefix sync-${subminor_tag}-to-dockerhub
+    sync-to-dockerhub       $minor_tag $images                                     2>&1 | prefix sync-${minor_tag}-to-dockerhub
+    sync-to-dockerhub       $major_tag $images                                     2>&1 | prefix sync-${major_tag}-to-dockerhub
+    sync-to-dockerhub       latest $images                                         2>&1 | prefix sync-latest-to-dockerhub
     "
 
     echo "Starting release $version. Action plan:"

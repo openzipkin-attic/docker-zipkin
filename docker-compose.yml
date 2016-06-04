@@ -1,48 +1,34 @@
 # This file uses the version 2 docker-compose file format, described here:
 # https://docs.docker.com/compose/compose-file/#version-2
 #
-# It runs the zipkin-cassandra, zipkin-query, and zipkin-web containers, and
-# uses docker-compose's default networking to wire the containers together.
+# It runs the zipkin and zipkin-cassandra containers, using docker-compose's
+# default networking to wire the containers together.
 
 version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-cassandra:1.40.1
+    image: openzipkin/zipkin-cassandra:1.1.4
     container_name: cassandra
     ports:
       - 9042:9042
-
-  # The query process services the UI, and also exposes a POST endpoint that
-  # instrumentation can send trace data to.
-  query:
-    image: openzipkin/zipkin-query:1.40.1
-    container_name: query
+  # The zipkin process services the UI, and also exposes a POST endpoint that
+  # instrumentation can send trace data to. Scribe is enabled by default.
+  zipkin:
+    image: openzipkin/zipkin:1.1.4
+    container_name: zipkin
     environment:
-      # Remove TRANSPORT_TYPE to disable tracing
-      - TRANSPORT_TYPE=http
       - STORAGE_TYPE=cassandra
-      # Point the query service at the storage backend
+      # When overriding this value, note the minimum supported version is 2.2
       - CASSANDRA_CONTACT_POINTS=cassandra
+      # Uncomment to disable self-tracing
+      # - SELF_TRACING_ENABLED=false
     ports:
-      # The http api is mounted at /api/v1
+      # Listen port for the Scribe transport
+      - 9410:9410
+      # Historical port used for the Zipkin HTTP Api
       - 9411:9411
-      # Admin interface is under the http path /admin
-      # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
-      - 9901:9901
+      # Zipkin UI used to be on a separate process listening on port 8080
+      - 8080:9411
     depends_on:
       - storage
-
-  web:
-    image: openzipkin/zipkin-web:1.40.1
-    environment:
-      # Remove TRANSPORT_TYPE to disable tracing
-      - TRANSPORT_TYPE=http
-      # Point the web service at the query backend
-      - QUERY_ADDR=query:9411
-    ports:
-      # Web UI is mounted at the root, and the http api under /api/v1
-      - 8080:8080
-      # Admin interface is under the http path /admin
-      # https://twitter.github.io/twitter-server/Features.html#http-admin-interface
-      - 9990:9990
