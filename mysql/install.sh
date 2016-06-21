@@ -2,7 +2,7 @@
 set -eux
 
 echo "*** Installing MySQL"
-apk add --update mysql mysql-client
+apk add --update --no-cache mysql mysql-client
 mysql_install_db --user=mysql --basedir=/usr/ --datadir=/mysql/data --force
 chown -R mysql /mysql
 # change default run path to the work dir

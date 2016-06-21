@@ -6,7 +6,7 @@ curl -SL http://downloads.datastax.com/community/dsc-cassandra-$CASSANDRA_VERSIO
 mv dsc-cassandra-$CASSANDRA_VERSION/* /cassandra/
 
 echo "*** Installing Python"
-apk add python
+apk add --update --no-cache python
 
 # TODO: Add native snappy lib. Native loader stacktraces in the cassandra log as a results, which is distracting.
 

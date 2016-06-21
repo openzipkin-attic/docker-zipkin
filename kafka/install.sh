@@ -3,7 +3,7 @@ set -eux
 
 echo "*** Installing Kafka and dependencies"
 echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-apk add --update runit
+apk add --update --no-cache runit
 
 # download and cherry-pick zookeeper binaries
 curl -SL http://mirrors.sonic.net/apache/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz | tar xz
@@ -45,7 +45,6 @@ EOF
 chmod +x /etc/service/kafka/run
 
 echo "*** Cleaning Up"
-rm -rf rm -rf /var/cache/apk/*
 rm -rf zookeeper-$ZOOKEEPER_VERSION
 
 echo "*** Image build complete"
