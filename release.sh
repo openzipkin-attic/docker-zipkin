@@ -242,10 +242,10 @@ main () {
     eval "$action_plan"
 
     echo
-    echo "All done. Now it's time to update docker-compose.yml with the new versions and validate that the new images work."
+    echo "All done. Now it's time to update docker-compose*.yml with the new versions and validate that the new images work."
     echo "Once you're done with that:"
     echo
-    echo "    git commit docker-compose.yml -m 'Release $version'; git push"
+    echo "    git commit docker-compose*.yml -m 'Release $version'; git push"
 }
 
 main
