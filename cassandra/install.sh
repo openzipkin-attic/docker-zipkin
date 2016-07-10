@@ -8,6 +8,10 @@ mv dsc-cassandra-$CASSANDRA_VERSION/* /cassandra/
 echo "*** Installing Python"
 apk add --update --no-cache python
 
+# Add patch files needed to work around python incompatibility
+rm /cassandra/lib/cassandra-driver-internal-only-*
+cp -r /cassandra/CASSANDRA-11850/* /cassandra/
+
 # TODO: Add native snappy lib. Native loader stacktraces in the cassandra log as a results, which is distracting.
 
 echo "*** Starting Cassandra"
