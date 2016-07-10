@@ -10,6 +10,9 @@ ENV CASSANDRA_VERSION=3.0.8 \
     JAVA=/usr/local/java/jre/bin/java \
     JVM_OPTS="-Dcassandra -Dcassandra.config.loader=ZipkinConfigurationLoader -Djava.net.preferIPv4Stack=true"
 
+# Add patch files needed to work around python incompatibility
+COPY CASSANDRA-11850/ /cassandra/CASSANDRA-11850
+
 ADD install.sh /usr/local/bin/install
 RUN /usr/local/bin/install
 
