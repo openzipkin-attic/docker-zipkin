@@ -3,7 +3,7 @@ FROM openzipkin/jre-full:1.8.0_72
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV SCALA_VERSION 2.11
-ENV KAFKA_VERSION 0.9.0.0
+ENV KAFKA_VERSION 0.9.0.1
 ENV ZOOKEEPER_VERSION 3.4.6
 
 WORKDIR /kafka

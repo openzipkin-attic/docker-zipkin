@@ -74,6 +74,20 @@ To start the MySQL-backed configuration, run:
 
     $ docker-compose -f docker-compose.yml -f docker-compose-mysql.yml up
 
+### Kafka
+
+The docker-compose configuration can be extended to host a test Kafka broker
+using the `docker-compose-kafka.yml` file. That file employs
+[docker-compose overrides](https://docs.docker.com/compose/extends/#multiple-compose-files)
+to add a Kafka+ZooKeeper container and relevant settings.
+
+To start the Cassandra+Kafka configuration, run:
+
+    $ docker-compose -f docker-compose.yml -f docker-compose-kafka.yml up
+
+By default, this assumes your Docker host IP is 192.168.99.100, which is what
+you would use for the broker IP when configuring application instrumentation.
+
 ### Legacy
 
 The Cassandra and MySQL docker-compose files described above use version 2 of
