@@ -4,6 +4,7 @@
 [![zipkin](https://quay.io/repository/openzipkin/zipkin/status "zipkin")](https://quay.io/repository/openzipkin/zipkin)
 [![zipkin-cassandra](https://quay.io/repository/openzipkin/zipkin-cassandra/status "zipkin-cassandra")](https://quay.io/repository/openzipkin/zipkin-cassandra)
 [![zipkin-mysql](https://quay.io/repository/openzipkin/zipkin-mysql/status "zipkin-mysql")](https://quay.io/repository/openzipkin/zipkin-mysql)
+[![zipkin-elasticsearch](https://quay.io/repository/openzipkin/zipkin-elasticsearch/status "zipkin-elasticsearch")](https://quay.io/repository/openzipkin/zipkin-elasticsearch)
 [![zipkin-kafka](https://quay.io/repository/openzipkin/zipkin-kafka/status "zipkin-kafka")](https://quay.io/repository/openzipkin/zipkin-kafka)
 
 
@@ -36,6 +37,9 @@ When in docker, the following environment variables also apply
 * `STORAGE_PORT_3306_TCP_ADDR` -- A MySQL node listening on port 3306. This
   environment variable is typically set by linking a container running
   `zipkin-mysql` as "storage" when you start the container.
+* `STORAGE_PORT_9300_TCP_ADDR` -- An Elasticsearch node listening on port 9300. This
+  environment variable is typically set by linking a container running
+  `zipkin-elasticsearch` as "storage" when you start the container.
 * `KAFKA_PORT_2181_TCP_ADDR` -- A zookeeper node listening on port 2181. This
   environment variable is typically set by linking a container running
   `zipkin-kafka` as "kafka" when you start the container.
@@ -74,6 +78,17 @@ To start the MySQL-backed configuration, run:
 
     $ docker-compose -f docker-compose.yml -f docker-compose-mysql.yml up
 
+### Elasticsearch
+
+The docker-compose configuration can be extended to use Elasticsearch instead of
+Cassandra, using the `docker-compose-elasticsearch.yml` file. That file employs
+[docker-compose overrides](https://docs.docker.com/compose/extends/#multiple-compose-files)
+to swap out one storage container for another.
+
+To start the Elasticsearch-backed configuration, run:
+
+    $ docker-compose -f docker-compose.yml -f docker-compose-elasticsearch.yml up
+
 ### Kafka
 
 The docker-compose configuration can be extended to host a test Kafka broker
@@ -90,10 +105,9 @@ you would use for the broker IP when configuring application instrumentation.
 
 ### Legacy
 
-The Cassandra and MySQL docker-compose files described above use version 2 of
-the docker-compose config file format. There is a legacy version 1 configuration
-also available, in the `docker-compose-legacy.yml` file. That configuration
-relies on container linking.
+The docker-compose files described above use version 2 of the docker-compose
+config file format. There is a legacy version 1 configuration also available, in
+`docker-compose-legacy.yml`. That configuration relies on container linking.
 
 To start the legacy configuration, run:
 
