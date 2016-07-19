@@ -1,0 +1,13 @@
+#!/bin/sh
+if [[ -z $ES_HOSTS ]]; then
+  if [[ -z $STORAGE_PORT_9300_TCP_ADDR ]]; then
+    echo "** ERROR: You need to link with a Elasticsearch container as 'storage' or specify ES_HOSTS env var."
+    echo "STORAGE_PORT_9300_TCP_ADDR (container link) or ES_HOSTS should contain a Elasticsearch hostname."
+    exit 1
+  fi
+  ES_HOSTS=$STORAGE_PORT_9300_TCP_ADDR
+fi
+
+export ES_HOSTS
+
+echo "Elasticsearch hosts: $ES_HOSTS"
