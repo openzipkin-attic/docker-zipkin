@@ -1,0 +1,25 @@
+# This file uses the version 2 docker-compose file format, described here:
+# https://docs.docker.com/compose/compose-file/#version-2
+#
+# It extends the default configuration from docker-compose.yml to run the
+# zipkin-mysql container instead of the zipkin-cassandra container.
+
+version: '2'
+
+services:
+  kafka-zookeeper:
+    build: kafka
+    image: openzipkin/zipkin-kafka:1.4.3
+    container_name: kafka-zookeeper
+    environment:
+      # corresponds to your docker machine and your producer's broker list
+      - KAFKA_ADVERTISED_HOST_NAME=192.168.99.100
+    ports:
+      - 2181:2181
+      - 9092:9092
+
+  zipkin:
+    environment:
+      - KAFKA_ZOOKEEPER=kafka-zookeeper
+    depends_on:
+      - kafka-zookeeper

@@ -36,10 +36,14 @@ EOF
 
 # create runit config, dependent on zookeeper, that advertises the container ip
 mkdir -p /etc/service/kafka
-cat > /etc/service/kafka/run <<-EOF
+cat > /etc/service/kafka/run <<-"EOF"
 #!/bin/sh
 sv start zookeeper || exit 1
-echo advertised.host.name=$(route -n | awk '/UG[ \t]/{print $2}') >> /kafka/config/server.properties
+if [[ -z "$KAFKA_ADVERTISED_HOST_NAME" ]]; then
+  echo advertised.host.name=$(route -n | awk '/UG[ \t]/{print $2}') >> /kafka/config/server.properties
+else
+  echo advertised.host.name=$KAFKA_ADVERTISED_HOST_NAME >> /kafka/config/server.properties
+fi
 exec sh /kafka/bin/kafka-run-class.sh -name kafkaServer -loggc kafka.Kafka /kafka/config/server.properties
 EOF
 chmod +x /etc/service/kafka/run
