@@ -9,7 +9,7 @@ version: '2'
 services:
   kafka-zookeeper:
     build: kafka
-    image: openzipkin/zipkin-kafka:1.4.4
+    image: openzipkin/zipkin-kafka:1.5.0
     container_name: kafka-zookeeper
     environment:
       # corresponds to your docker machine and your producer's broker list
