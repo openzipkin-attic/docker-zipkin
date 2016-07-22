@@ -63,9 +63,8 @@ then click the "Find Traces" button.
 ### Cassandra
 
 The default docker-compose configuration defined in `docker-compose.yml` is
-backed by a single-node Cassandra. This configuration starts `zipkin` and
-`zipkin-cassandra` services in their own containers and configures required
-dependencies.
+backed by a single-node Cassandra. This configuration starts `zipkin`,
+`zipkin-cassandra` and `zipkin-dependencies` (cron job) in their own containers.
 
 ### MySQL
 

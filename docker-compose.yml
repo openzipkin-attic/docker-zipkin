@@ -12,6 +12,7 @@ services:
     container_name: cassandra
     ports:
       - 9042:9042
+
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is enabled by default.
   zipkin:
@@ -32,5 +33,17 @@ services:
       - 9411:9411
       # Zipkin UI used to be on a separate process listening on port 8080
       - 8080:9411
+    depends_on:
+      - storage
+
+  # Adds a cron to process spans since midnight every hour, and all spans each day
+  # This data is served by http://192.168.99.100:8080/dependency
+  dependencies:
+    image: openzipkin/zipkin-dependencies
+    container_name: dependencies
+    entrypoint: crond -f -d 8
+    environment:
+      - STORAGE_TYPE=cassandra
+      - CASSANDRA_CONTACT_POINTS=cassandra
     depends_on:
       - storage
