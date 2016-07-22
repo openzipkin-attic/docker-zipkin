@@ -38,10 +38,12 @@ services:
 
   # Adds a cron to process spans since midnight every hour, and all spans each day
   # This data is served by http://192.168.99.100:8080/dependency
+  #
+  # For more details, see https://github.com/openzipkin/docker-zipkin-dependencies
   dependencies:
     image: openzipkin/zipkin-dependencies
     container_name: dependencies
-    entrypoint: crond -f -d 8
+    entrypoint: crond -f
     environment:
       - STORAGE_TYPE=cassandra
       - CASSANDRA_CONTACT_POINTS=cassandra
