@@ -8,7 +8,7 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-cassandra:1.5.0
+    image: openzipkin/zipkin-cassandra:1.5.1
     container_name: cassandra
     ports:
       - 9042:9042
@@ -16,7 +16,7 @@ services:
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is enabled by default.
   zipkin:
-    image: openzipkin/zipkin:1.5.0
+    image: openzipkin/zipkin:1.5.1
     container_name: zipkin
     environment:
       - STORAGE_TYPE=cassandra
@@ -24,8 +24,8 @@ services:
       - CASSANDRA_CONTACT_POINTS=cassandra
       # Uncomment to disable scribe
       # - SCRIBE_ENABLED=false
-      # Uncomment to disable self-tracing
-      # - SELF_TRACING_ENABLED=false
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
     ports:
       # Listen port for the Scribe transport
       - 9410:9410
