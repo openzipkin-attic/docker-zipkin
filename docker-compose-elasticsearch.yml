@@ -9,7 +9,7 @@ version: '2'
 services:
   # Run Elasticsearch instead of Cassandra
   storage:
-    image: openzipkin/zipkin-elasticsearch:1.5.1
+    image: openzipkin/zipkin-elasticsearch:1.6.0
     container_name: elasticsearch
     ports:
       # http
@@ -19,7 +19,7 @@ services:
 
   # Switch storage type to Elasticsearch
   zipkin:
-    image: openzipkin/zipkin:1.5.1
+    image: openzipkin/zipkin:1.6.0
     environment:
       - STORAGE_TYPE=elasticsearch
       # Point the zipkin at the storage backend

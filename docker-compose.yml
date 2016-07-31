@@ -8,7 +8,7 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-cassandra:1.5.1
+    image: openzipkin/zipkin-cassandra:1.6.0
     container_name: cassandra
     ports:
       - 9042:9042
@@ -16,7 +16,7 @@ services:
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is enabled by default.
   zipkin:
-    image: openzipkin/zipkin:1.5.1
+    image: openzipkin/zipkin:1.6.0
     container_name: zipkin
     environment:
       - STORAGE_TYPE=cassandra
