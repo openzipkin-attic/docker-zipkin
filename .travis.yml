@@ -33,6 +33,9 @@ before_script:
   - git remote set-url origin "git@github.com:openzipkin/docker-zipkin.git"
   # Log in to Docker Hub, needed to mirror images built on quay.io
   - docker login -e abesto0+docker-zipkin-deployer@gmail.com -u dockerzipkindeployer -p "$DOCKERHUB_PASSWORD"
+  # So git doesn't die trying to figure out Travis' email address
+  - git config user.name "dockerzipkindeployer"
+  - git config user.email "docker-zipkin-deployer@gmail.com"
 
 script:
  # Also known as doit.sh
