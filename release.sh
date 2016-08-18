@@ -186,7 +186,7 @@ sync-to-dockerhub () {
         quay_name="quay.io/${dockerhub_name}"
         echo "Syncing ${quay_name} to Docker Hub as ${dockerhub_name}"
         docker pull "$quay_name"
-        docker tag -f "$quay_name" "$dockerhub_name"
+        docker tag "$quay_name" "$dockerhub_name"
         retry 3 docker push "$dockerhub_name"
     done
 }
