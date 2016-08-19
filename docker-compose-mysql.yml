@@ -9,14 +9,14 @@ version: '2'
 services:
   # Run MySQL instead of Cassandra
   storage:
-    image: openzipkin/zipkin-mysql:1.6.0
+    image: openzipkin/zipkin-mysql:1.7.0
     container_name: mysql
     ports:
       - 3306:3306
 
   # Switch storage type to MySQL
   zipkin:
-    image: openzipkin/zipkin:1.6.0
+    image: openzipkin/zipkin:1.7.0
     environment:
       - STORAGE_TYPE=mysql
       # Point the zipkin at the storage backend
