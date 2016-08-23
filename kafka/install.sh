@@ -2,7 +2,7 @@
 set -eux
 
 echo "*** Installing Kafka and dependencies"
-echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 apk add --update --no-cache runit
 
 # download and cherry-pick zookeeper binaries
