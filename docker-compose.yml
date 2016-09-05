@@ -10,7 +10,7 @@ services:
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is enabled by default.
   zipkin:
-    image: openzipkin/zipkin:1.8.2
+    image: openzipkin/zipkin:1.8.3
     container_name: zipkin
     ports:
       # Listen port for the Scribe transport
