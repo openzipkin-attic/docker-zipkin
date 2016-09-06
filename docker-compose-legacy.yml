@@ -6,7 +6,7 @@
 # wire the containers together.
 
 storage:
-  image: openzipkin/zipkin-cassandra:1.8.3
+  image: openzipkin/zipkin-cassandra:1.8.4
   ports:
     - 9042:9042
 
@@ -14,7 +14,7 @@ storage:
 # instrumentation can send trace data to. Scribe is enabled by default.
 # It can also poll kafka, when the KAFKA_ZOOKEEPER variable is set.
 zipkin:
-  image: openzipkin/zipkin:1.8.3
+  image: openzipkin/zipkin:1.8.4
   environment:
     - STORAGE_TYPE=cassandra
     # Uncomment to enable self-tracing

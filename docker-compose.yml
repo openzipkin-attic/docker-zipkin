@@ -7,11 +7,25 @@
 version: '2'
 
 services:
+  storage:
+    image: openzipkin/zipkin-cassandra:1.8.4
+    container_name: cassandra
+    ports:
+      - 9042:9042
+
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is enabled by default.
   zipkin:
-    image: openzipkin/zipkin:1.8.3
+    image: openzipkin/zipkin:1.8.4
     container_name: zipkin
+    environment:
+      - STORAGE_TYPE=cassandra
+      # When overriding this value, note the minimum supported version is 2.2
+      - CASSANDRA_CONTACT_POINTS=cassandra
+      # Uncomment to disable scribe
+      # - SCRIBE_ENABLED=false
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
     ports:
       # Listen port for the Scribe transport
       - 9410:9410
@@ -19,3 +33,19 @@ services:
       - 9411:9411
       # Zipkin UI used to be on a separate process listening on port 8080
       - 8080:9411
+    depends_on:
+      - storage
+
+  # Adds a cron to process spans since midnight every hour, and all spans each day
+  # This data is served by http://192.168.99.100:8080/dependency
+  #
+  # For more details, see https://github.com/openzipkin/docker-zipkin-dependencies
+  dependencies:
+    image: openzipkin/zipkin-dependencies
+    container_name: dependencies
+    entrypoint: crond -f
+    environment:
+      - STORAGE_TYPE=cassandra
+      - CASSANDRA_CONTACT_POINTS=cassandra
+    depends_on:
+      - storage
