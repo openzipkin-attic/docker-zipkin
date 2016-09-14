@@ -88,8 +88,8 @@ backed by MySQL. This configuration starts `zipkin`, `zipkin-mysql` and
 
 ### Cassandra
 
-The docker-compose configuration can be extended to use MySQL instead of
-Cassandra, using the `docker-compose-mysql.yml` file. That file employs
+The docker-compose configuration can be extended to use Cassandra instead of
+MySQL, using the `docker-compose-cassandra.yml` file. That file employs
 [docker-compose overrides](https://docs.docker.com/compose/extends/#multiple-compose-files)
 to swap out one storage container for another.
 
