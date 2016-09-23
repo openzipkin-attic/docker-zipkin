@@ -137,3 +137,5 @@ To start the legacy configuration, run:
 All images share a base image, `openzipkin/jre-full`, built on the Alpine image
 [`delitescere/java:8`](https://github.com/delitescere/docker-zulu), which is much
 smaller than the previously used `debian:sid`d image.
+
+If using a provided MySQL server or image, ensure schema and other parameters match the [docs](https://github.com/openzipkin/zipkin/tree/master/zipkin-storage/mysql#applying-the-schema).
