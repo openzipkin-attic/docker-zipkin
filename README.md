@@ -59,7 +59,8 @@ When in docker, the following environment variables also apply
   `zipkin-mysql` as "storage" when you start the container.
 * `STORAGE_PORT_9300_TCP_ADDR` -- An Elasticsearch node listening on port 9300. This
   environment variable is typically set by linking a container running
-  `zipkin-elasticsearch` as "storage" when you start the container.
+  `zipkin-elasticsearch` as "storage" when you start the container. This is ignored
+  when `ES_HOSTS` or `ES_AWS_DOMAIN` are set.
 * `KAFKA_PORT_2181_TCP_ADDR` -- A zookeeper node listening on port 2181. This
   environment variable is typically set by linking a container running
   `zipkin-kafka` as "kafka" when you start the container.
