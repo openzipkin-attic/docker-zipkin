@@ -6,15 +6,15 @@ ENV ZIPKIN_VERSION 1.12.1
 
 # Temporarily hard-code zipkin's configuration to a class that looks up the container's IP
 ADD ZipkinConfigurationLoader.class /cassandra/build/classes/main/ZipkinConfigurationLoader.class
-ENV CASSANDRA_VERSION=3.0.8 \
+ENV CASSANDRA_VERSION=3.9 \
     JAVA=/usr/local/java/jre/bin/java \
     JVM_OPTS="-Dcassandra -Dcassandra.config.loader=ZipkinConfigurationLoader -Djava.net.preferIPv4Stack=true"
 
-# Add patch files needed to work around python incompatibility
-COPY CASSANDRA-11850/ /cassandra/CASSANDRA-11850
-
 ADD install.sh /usr/local/bin/install
 RUN /usr/local/bin/install
+
+# cassandra complains if run as root
+USER cassandra
 
 ADD run.sh /usr/local/bin/run.sh
 CMD /usr/local/bin/run.sh
