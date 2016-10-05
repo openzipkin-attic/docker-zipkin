@@ -110,6 +110,22 @@ To start the Elasticsearch-backed configuration, run:
 
     $ docker-compose -f docker-compose.yml -f docker-compose-elasticsearch.yml up
 
+#### Elasticsearch Service on Amazon
+
+If you are using Elasticsearch against Amazon, it will search for credentials including those
+in the `~/.aws` directory. If you want to try Zipkin against Amazon Elasticsearch Service, the
+easiest start is to share your credentials with Zipkin's docker image.
+
+For example, if you are able to run `aws es list-domain-names`, then you
+should be able to start Zipkin as simply as this:
+
+```bash
+$ docker run -d -p 9411:9411 \
+  -e STORAGE_TYPE=elasticsearch -e ES_AWS_DOMAIN=your_domain \
+  -v $HOME/.aws:/root/.aws:ro \
+  openzipkin/zipkin
+```
+
 ### Kafka
 
 The docker-compose configuration can be extended to host a test Kafka broker
