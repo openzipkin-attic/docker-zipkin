@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
-ENV ZIPKIN_VERSION 1.14.2
+ENV ZIPKIN_VERSION 1.14.3
 
 RUN apk add --update --no-cache nginx curl && \
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/* && \
