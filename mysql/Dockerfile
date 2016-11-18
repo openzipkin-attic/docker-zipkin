@@ -2,7 +2,7 @@
 FROM openzipkin/jre-full:1.8.0_112
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_VERSION 1.16.0
+ENV ZIPKIN_VERSION 1.16.1
 
 WORKDIR /mysql
 ADD install.sh /mysql/install
