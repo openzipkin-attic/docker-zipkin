@@ -19,7 +19,7 @@ ENV ELASTICSEARCH_VERSION 2.3.4
 WORKDIR /elasticsearch
 
 # single layer to install elasticsearch and the user
-RUN curl -SL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz| tar xz && \
+RUN curl -SL https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/$ELASTICSEARCH_VERSION/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz| tar xz && \
     mv elasticsearch-$ELASTICSEARCH_VERSION/* /elasticsearch/ && \
     adduser -S elasticsearch && \
     chown -R elasticsearch /elasticsearch
