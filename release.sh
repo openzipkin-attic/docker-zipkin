@@ -69,7 +69,7 @@ bump-zipkin-version () {
 
     if "$modified"; then
         git commit -m "Bump ZIPKIN_VERSION to $version"
-        git push
+        git push --set-upstream $git_remote $target_git_branch
     else
         echo "ZIPKIN_VERSION was already ${version}, no commit to make"
     fi
