@@ -11,9 +11,6 @@ services:
   storage:
     image: openzipkin/zipkin-elasticsearch:1.18.0
     container_name: elasticsearch
-    ports:
-      # http
-      - 9200:9200
 
   # Switch storage type to Elasticsearch
   zipkin:

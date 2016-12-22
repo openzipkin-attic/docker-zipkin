@@ -11,8 +11,6 @@ services:
   storage:
     image: openzipkin/zipkin-cassandra:1.18.0
     container_name: cassandra
-    ports:
-      - 9042:9042
 
   # Switch storage type to Cassandra
   zipkin:
