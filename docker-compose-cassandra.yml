@@ -9,12 +9,12 @@ version: '2'
 services:
   # Run Cassandra instead of MySQL
   storage:
-    image: openzipkin/zipkin-cassandra:1.18.0
+    image: openzipkin/zipkin-cassandra:1.19.0
     container_name: cassandra
 
   # Switch storage type to Cassandra
   zipkin:
-    image: openzipkin/zipkin:1.18.0
+    image: openzipkin/zipkin:1.19.0
     environment:
       - STORAGE_TYPE=cassandra
       # When overriding this value, note the minimum supported version is 2.2
