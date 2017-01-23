@@ -10,13 +10,13 @@ version: '2'
 
 services:
   storage:
-    image: openzipkin/zipkin-mysql:1.19.0
+    image: openzipkin/zipkin-mysql
     container_name: mysql
 
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is enabled by default.
   zipkin:
-    image: openzipkin/zipkin:1.19.0
+    image: openzipkin/zipkin
     container_name: zipkin
     # Environment settings are defined here https://github.com/openzipkin/zipkin/tree/1.19.0/zipkin-server#environment-variables
     environment:
