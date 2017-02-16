@@ -1,6 +1,6 @@
 #!/bin/sh
-if [[ -z $ES_HOSTS && -z $ES_AWS_DOMAIN ]]; then
-  if [[ -z $STORAGE_PORT_9200_TCP_ADDR ]]; then
+if [[ -z "$ES_HOSTS" && -z "$ES_AWS_DOMAIN" ]]; then
+  if [[ -z "$STORAGE_PORT_9200_TCP_ADDR" ]]; then
     echo "** ERROR: You need to link with a Elasticsearch container as 'storage' or specify an"
     echo "elasticsearch cluster via the ES_HOSTS (hostname:port or http url) or ES_AWS_DOMAIN env vars."
     echo "STORAGE_PORT_9200_TCP_ADDR (container link) should contain an address, or one of ES_HOSTS or"
