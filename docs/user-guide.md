@@ -79,11 +79,10 @@ CONTAINER ID        IMAGE                            COMMAND                  CR
 88fb6ac58893        openzipkin/zipkin-mysql:1.11.0   "/bin/sh -c /mysql/ru"   12 hours ago        Up 36 seconds       0.0.0.0:3306->3306/tcp             mysql
 ```
 
-Zipkin listens on a couple ports: 9411 (web ui and http api), 9410 (scribe collector)
+Zipkin listens on port 9411 (web ui and http api)
 
 ```sh
 $ docker port zipkin
-9410/tcp -> 0.0.0.0:9410
 9411/tcp -> 0.0.0.0:9411
 ```
 
