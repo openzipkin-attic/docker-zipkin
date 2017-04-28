@@ -1,4 +1,5 @@
-FROM nginx:alpine
+# pins on 1.11 as it is built against Alpine 3.4 which doesn't die with SSL certificate problem
+FROM nginx:1.11-alpine
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
 ENV ZIPKIN_UI_VERSION 0.2.1
