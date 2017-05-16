@@ -10,7 +10,7 @@ tag under them, to let users choose the level of version pinning they prefer.
 
 ## Release using Travis (recommended)
 
-1. Update zipkin-ui/Dockerfile with the latest release
+1. Update zipkin-ui/Dockerfile with the latest release (if it is out-of-date)
 
    Commit the latest release of https://github.com/openzipkin/zipkin-ui since version numbers aren't aligned.
 
@@ -21,10 +21,7 @@ tag under them, to let users choose the level of version pinning they prefer.
 
 1. **Test the new images**
 
-   Locally change `docker-compose.yml` to use the newly built versions (the tag will be something like `1.1.4`),
-   execute `docker-compose up`, and verify that all is well with the world. TBD: How exactly do we do that?
-
-1. **Commit, push `docker-compose.yml`**
+   Execute `docker-compose pull` then `docker-compose up`, and verify that all is well with the world. Ex make sure the /info url matches the version you pushed.
 
 1. **There is no step four**
 
