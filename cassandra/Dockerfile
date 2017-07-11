@@ -6,7 +6,7 @@ ENV ZIPKIN_VERSION 1.28.1
 
 # Temporarily hard-code zipkin's configuration to a class that looks up the container's IP
 ADD ZipkinConfigurationLoader.class /cassandra/build/classes/main/ZipkinConfigurationLoader.class
-ENV CASSANDRA_VERSION=3.11 \
+ENV CASSANDRA_VERSION=3.11.0 \
     JAVA=/usr/local/java/jre/bin/java \
     JVM_OPTS="-Dcassandra -Dcassandra.config.loader=ZipkinConfigurationLoader -Djava.net.preferIPv4Stack=true"
 
