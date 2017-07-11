@@ -1,5 +1,5 @@
 # Share the same base image to reduce layers used in testing
-FROM openzipkin/jre-full:1.8.0_121
+FROM openzipkin/jre-full:1.8.0_131
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 WORKDIR /mysql

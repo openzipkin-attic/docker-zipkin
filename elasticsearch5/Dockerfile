@@ -11,10 +11,10 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 #
-FROM openzipkin/jre-full:1.8.0_121
+FROM openzipkin/jre-full:1.8.0_131
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ELASTICSEARCH_VERSION 5.0.1
+ENV ELASTICSEARCH_VERSION 5.5.0
 
 WORKDIR /elasticsearch
 
