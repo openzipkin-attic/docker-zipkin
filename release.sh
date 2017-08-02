@@ -32,7 +32,7 @@ started_at=$($date +%s)
 ## Read input and env
 release_tag="$1"
 # Service images
-images="${IMAGES:-zipkin-cassandra zipkin-elasticsearch zipkin-elasticsearch5 zipkin-kafka zipkin-ui zipkin-mysql zipkin}"
+images="${IMAGES:-zipkin-cassandra zipkin-elasticsearch zipkin-elasticsearch5 zipkin-elasticsearch6 zipkin-kafka zipkin-ui zipkin-mysql zipkin}"
 dirs="${DIRS:-cassandra elasticsearch elasticsearch5 kafka zipkin-ui mysql zipkin}"
 # Remotes, auth
 docker_organization="${DOCKER_ORGANIZATION:-openzipkin}"
