@@ -11,6 +11,9 @@ services:
   storage:
     image: openzipkin/zipkin-cassandra
     container_name: cassandra
+    # Uncomment to expose the storage port for testing
+    # ports:
+    #   - 9042:9042
 
   # Switch storage type to Cassandra
   zipkin:

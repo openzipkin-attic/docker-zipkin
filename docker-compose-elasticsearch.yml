@@ -11,6 +11,9 @@ services:
   storage:
     image: openzipkin/zipkin-elasticsearch
     container_name: elasticsearch
+    # Uncomment to expose the storage port for testing
+    # ports:
+    #   - 9200:9200
 
   # Switch storage type to Elasticsearch
   zipkin:
