@@ -26,8 +26,8 @@ services:
       - STORAGE_TYPE=mysql
       # Point the zipkin at the storage backend
       - MYSQL_HOST=mysql
-      # Uncomment to disable scribe
-      # - SCRIBE_ENABLED=false
+      # Uncomment to enable scribe
+      # - SCRIBE_ENABLED=true
       # Uncomment to enable self-tracing
       # - SELF_TRACING_ENABLED=true
       # Uncomment to enable debug logging
@@ -35,6 +35,8 @@ services:
     ports:
       # Port used for the Zipkin UI and HTTP Api
       - 9411:9411
+      # Uncomment if you set SCRIBE_ENABLED=true
+      # - 9410:9410
     depends_on:
       - storage
 
