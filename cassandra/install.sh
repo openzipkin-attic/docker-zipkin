@@ -25,7 +25,7 @@ echo "*** Importing Scheme"
 curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra/src/main/resources/cassandra-schema-cql3.txt \
      | /cassandra/bin/cqlsh --debug localhost
 
-curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra3/src/main/resources/cassandra3-schema.cql \
+curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema.cql \
      | /cassandra/bin/cqlsh --debug localhost
 
 echo "*** Stopping Cassandra"
