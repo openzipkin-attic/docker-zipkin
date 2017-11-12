@@ -19,13 +19,14 @@ services:
   zipkin:
     image: openzipkin/zipkin
     environment:
-      - STORAGE_TYPE=cassandra
-      # When overriding this value, note the minimum supported version is 2.2
+      - STORAGE_TYPE=cassandra3
+      # When overriding this value, note the minimum supported version is 3.9
+      # If you you cannot run 3.9+, but can run 2.2+, set STORAGE_TYPE=cassandra
       - CASSANDRA_CONTACT_POINTS=cassandra
     depends_on:
       - storage
 
   dependencies:
     environment:
-      - STORAGE_TYPE=cassandra
+      - STORAGE_TYPE=cassandra3
       - CASSANDRA_CONTACT_POINTS=cassandra

@@ -100,7 +100,7 @@ It will automagically download the images in the containers' docker files and ru
 
 ## Zipkin's storage schema
 
-- [Cassandra](https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/cassandra/src/main/resources/cassandra-schema-cql3.txt)
+- [Cassandra](https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema.cql)
 - [MySQL](https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql/src/main/resources/mysql.sql)
 
 ## Connecting to the storage directly
