@@ -3,10 +3,11 @@ set -eux
 
 echo "*** Installing Kafka and dependencies"
 echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-apk add --update --no-cache runit
+apk add --update --no-cache runit jq
 
 # download and cherry-pick zookeeper binaries
-curl -SL http://mirrors.sonic.net/apache/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz | tar xz
+APACHE_MIRROR=$(curl --stderr /dev/null https://www.apache.org/dyn/closer.cgi\?as_json\=1 | jq -r '.preferred')
+curl -sSL $APACHE_MIRROR/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz | tar xz
 mkdir zookeeper
 mv zookeeper-$ZOOKEEPER_VERSION/lib zookeeper/
 mv zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.jar zookeeper/lib
@@ -21,7 +22,7 @@ EOF
 chmod +x /etc/service/zookeeper/run
 
 # download kafka binaries
-curl -SL http://apache.mirrors.spacedump.net/kafka/$KAFKA_VERSION/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | tar xz
+curl -sSL $APACHE_MIRROR/kafka/$KAFKA_VERSION/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz | tar xz
 mv kafka_$SCALA_VERSION-$KAFKA_VERSION/* .
 
 # Set explicit, basic configuration
