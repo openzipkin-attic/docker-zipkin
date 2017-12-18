@@ -9,7 +9,7 @@ version: '2'
 services:
   # Run Elasticsearch instead of MySQL
   storage:
-    image: openzipkin/zipkin-elasticsearch5
+    image: openzipkin/zipkin-elasticsearch6
     container_name: elasticsearch
     # Uncomment to expose the storage port for testing
     # ports:
@@ -22,6 +22,9 @@ services:
       - STORAGE_TYPE=elasticsearch
       # Point the zipkin at the storage backend
       - ES_HOSTS=elasticsearch
+      # Uncomment to see requests to and from elasticsearch
+      # - ES_HTTP_LOGGING=BODY
+
   dependencies:
     environment:
       - STORAGE_TYPE=elasticsearch
