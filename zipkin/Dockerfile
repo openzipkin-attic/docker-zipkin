@@ -15,7 +15,7 @@ FROM openzipkin/jre-full:1.8.0_152
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
-ENV ZIPKIN_VERSION 2.4.3
+ENV ZIPKIN_VERSION 2.4.4
 
 # Use to set heap, trust store or other system properties.
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
