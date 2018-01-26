@@ -6,7 +6,7 @@ WORKDIR /mysql
 ADD install.sh /mysql/install
 RUN /mysql/install
 
-ENV ZIPKIN_VERSION 2.4.4
+ENV ZIPKIN_VERSION 2.4.5
 
 ADD configure.sh /mysql/configure
 RUN /mysql/configure
