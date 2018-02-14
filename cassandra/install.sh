@@ -28,6 +28,9 @@ curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-
 curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema.cql \
      | /cassandra/bin/cqlsh --debug localhost
 
+curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema.cql \
+     | sed 's/ zipkin2/ zipkin2_udts/g' | /cassandra/bin/cqlsh --debug localhost
+
 curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema-indexes.cql \
      | /cassandra/bin/cqlsh --debug localhost
 
