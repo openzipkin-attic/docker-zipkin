@@ -26,7 +26,8 @@ WORKDIR /zipkin
 
 RUN apk add unzip --no-cache && \
     curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-server/$ZIPKIN_VERSION/zipkin-server-$ZIPKIN_VERSION-exec.jar > zipkin-server.jar && \
-    unzip zipkin-server.jar && \
+    # don't break when unzip finds an extra header https://github.com/openzipkin/zipkin/issues/1932
+    unzip zipkin-server.jar ; \
     rm zipkin-server.jar && \
     curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-autoconfigure-collector-kafka10/$ZIPKIN_VERSION/zipkin-autoconfigure-collector-kafka10-$ZIPKIN_VERSION-module.jar > kafka10.jar && \
     unzip kafka10.jar -d kafka10 && \
