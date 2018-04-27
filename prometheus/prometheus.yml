@@ -12,25 +12,12 @@ scrape_configs:
     static_configs:
       - targets: ['zipkin:9411']
     metric_relabel_configs:
-      # Response code count
-      - source_labels: [__name__]
-        regex: '^counter_status_(\d+)_(.*)$'
-        replacement: '${1}'
-        target_label: status
-      - source_labels: [__name__]
-        regex: '^counter_status_(\d+)_(.*)$'
-        replacement: '${2}'
-        target_label: path
-      - source_labels: [__name__]
-        regex: '^counter_status_(\d+)_(.*)$'
-        replacement: 'http_requests_total'
-        target_label: __name__
       # Received message count
       - source_labels: [__name__]
-        regex: '(?:gauge|counter)_zipkin_collector_(.*)_([^_]*)'
+        regex: '(?:gauge|counter)_zipkin_collector_(.*)_([^_]*)_total'
         replacement: '${2}'
         target_label: transport
       - source_labels: [__name__]
-        regex: '(?:gauge|counter)_zipkin_collector_(.*)_([^_]*)'
+        regex: '(?:gauge|counter)_zipkin_collector_(.*)_([^_]*)_total'
         replacement: 'zipkin_collector_${1}'
         target_label: __name__
