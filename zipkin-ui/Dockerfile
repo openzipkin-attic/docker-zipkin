@@ -2,7 +2,7 @@
 FROM nginx:1.11-alpine
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
-ENV ZIPKIN_VERSION 2.7.5
+ENV ZIPKIN_VERSION 2.8.1
 ENV ZIPKIN_BASE_URL=http://zipkin:9411
 
 RUN apk add --update --no-cache nginx curl && \
