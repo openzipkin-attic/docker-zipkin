@@ -32,14 +32,14 @@ RUN apk add unzip --no-cache && \
     curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-autoconfigure-collector-scribe/$ZIPKIN_VERSION/zipkin-autoconfigure-collector-scribe-$ZIPKIN_VERSION-module.jar > scribe.jar && \
     unzip scribe.jar -d scribe && \
     rm scribe.jar && \
-    curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-autoconfigure-collector-kafka10/$ZIPKIN_VERSION/zipkin-autoconfigure-collector-kafka10-$ZIPKIN_VERSION-module.jar > kafka10.jar && \
-    unzip kafka10.jar -d kafka10 && \
-    rm kafka10.jar && \
+    curl -SL $ZIPKIN_REPO/io/zipkin/java/zipkin-autoconfigure-collector-kafka08/$ZIPKIN_VERSION/zipkin-autoconfigure-collector-kafka08-$ZIPKIN_VERSION-module.jar > kafka08.jar && \
+    unzip kafka08.jar -d kafka08 && \
+    rm kafka08.jar && \
     apk del unzip
 
 EXPOSE 9410 9411
 
 CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; \
     test -n "$SCRIBE_ENABLED" && JAVA_OPTS="${JAVA_OPTS} -Dloader.path=scribe -Dspring.profiles.active=scribe"; \
-    test -n "$KAFKA_BOOTSTRAP_SERVERS" && JAVA_OPTS="${JAVA_OPTS} -Dloader.path=kafka10 -Dspring.profiles.active=kafka"; \
+    test -n "$KAFKA_ZOOKEEPER" && JAVA_OPTS="${JAVA_OPTS} -Dloader.path=kafka08 -Dspring.profiles.active=kafka"; \
     exec java ${JAVA_OPTS} -cp . org.springframework.boot.loader.PropertiesLauncher
