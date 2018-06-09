@@ -22,13 +22,13 @@ while [[ "$timeout" -gt 0 ]] && ! /cassandra/bin/cqlsh -e 'SHOW VERSION' localho
 done
 
 echo "*** Importing Scheme"
-curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra/src/main/resources/cassandra-schema-cql3.txt \
+curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra-v1/src/main/resources/cassandra-schema-cql3.txt \
      | /cassandra/bin/cqlsh --debug localhost
 
-curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema.cql \
+curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra/src/main/resources/zipkin2-schema.cql \
      | /cassandra/bin/cqlsh --debug localhost
 
-curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema.cql \
+curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/cassandra/src/main/resources/zipkin2-schema.cql \
      | sed 's/ zipkin2/ zipkin2_udts/g' | /cassandra/bin/cqlsh --debug localhost
 
 curl https://raw.githubusercontent.com/openzipkin/zipkin/$ZIPKIN_VERSION/zipkin-storage/zipkin2_cassandra/src/main/resources/zipkin2-schema-indexes.cql \
