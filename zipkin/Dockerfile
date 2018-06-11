@@ -41,5 +41,5 @@ EXPOSE 9410 9411
 
 CMD test -n "$STORAGE_TYPE" && source .${STORAGE_TYPE}_profile; \
     test -n "$SCRIBE_ENABLED" && JAVA_OPTS="${JAVA_OPTS} -Dloader.path=scribe -Dspring.profiles.active=scribe"; \
-    test -n "$KAFKA_ZOOKEEPER" && JAVA_OPTS="${JAVA_OPTS} -Dloader.path=kafka08 -Dspring.profiles.active=kafka"; \
+    test -n "$KAFKA_ZOOKEEPER" && JAVA_OPTS="${JAVA_OPTS} -Dloader.path=kafka08 -Dspring.profiles.active=kafka08"; \
     exec java ${JAVA_OPTS} -cp . org.springframework.boot.loader.PropertiesLauncher
