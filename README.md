@@ -164,11 +164,6 @@ using a `bootstrapServers` value of `host.docker.internal:9092` if your applicat
 If you are using Docker machine, adjust `KAFKA_ADVERTISED_HOST_NAME` in `docker-compose-kafka.yml`
 and the `bootstrapServers` configuration of the kafka sender to match your Docker host IP (ex. 192.168.99.100:19092).
 
-If you prefer to activate the
-[Kafka 0.8 collector](https://github.com/openzipkin/zipkin/tree/master/zipkin-collector/kafka08) (which uses ZooKeeper),
-use `docker-compose-kafka08.yml` instead of `docker-compose-kafka.yml`:
-
-    $ docker-compose -f docker-compose.yml -f docker-compose-kafka08.yml up
 
 ### UI
 
@@ -211,6 +206,8 @@ $ docker run -d -p 80:80 \
 
 ### Legacy
 
+#### Old configuration format
+
 The docker-compose files described above use version 2 of the docker-compose
 config file format. There is a legacy version 1 configuration also available, in
 `docker-compose-legacy.yml`. That configuration relies on container linking.
@@ -218,6 +215,14 @@ config file format. There is a legacy version 1 configuration also available, in
 To start the legacy configuration, run:
 
     $ docker-compose -f docker-compose-legacy.yml up
+
+#### Old Kafka (0.8) setup
+
+If you prefer to activate the
+[Kafka 0.8 collector](https://github.com/openzipkin/zipkin/tree/master/zipkin-collector/kafka08) (which uses ZooKeeper),
+use `docker-compose-kafka08.yml` instead of `docker-compose-kafka.yml`:
+
+    $ docker-compose -f docker-compose.yml -f docker-compose-kafka08.yml up
 
 ## Notes
 
