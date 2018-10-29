@@ -161,10 +161,6 @@ Then configure the [Kafka sender](https://github.com/openzipkin/zipkin-reporter-
 or [Kafka 0.8 sender](https://github.com/openzipkin/zipkin-reporter-java/blob/master/kafka08/src/main/java/zipkin2/reporter/kafka08/KafkaSender.java)
 using a `bootstrapServers` value of `host.docker.internal:9092` if your application is a docker container or `localhost:19092` if not, but running on the same host.
 
-If you are using Docker machine, adjust `KAFKA_ADVERTISED_HOST_NAME` in `docker-compose-kafka.yml`
-and the `bootstrapServers` configuration of the kafka sender to match your Docker host IP (ex. 192.168.99.100:19092).
-
-
 ### UI
 
 The docker-compose configuration can be extended to host the UI on port 80
@@ -215,6 +211,12 @@ config file format. There is a legacy version 1 configuration also available, in
 To start the legacy configuration, run:
 
     $ docker-compose -f docker-compose-legacy.yml up
+
+
+#### Docker machine and Kafka
+
+If you are using Docker machine, adjust `KAFKA_ADVERTISED_HOST_NAME` in `docker-compose-kafka.yml`
+and the `bootstrapServers` configuration of the kafka sender to match your Docker host IP (ex. 192.168.99.100:19092).
 
 #### Old Kafka (0.8) setup
 
