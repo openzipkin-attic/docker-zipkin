@@ -148,7 +148,7 @@ $ docker run -d -p 9411:9411 \
 ### Kafka
 
 The docker-compose configuration can be extended to host a test Kafka broker
-and activate the [Kafka 0.8 collector](https://github.com/openzipkin/zipkin/tree/master/zipkin-collector/kafka08)
+and activate the [Kafka collector](https://github.com/openzipkin/zipkin/tree/master/zipkin-collector/kafka)
 using the `docker-compose-kafka.yml` file. That file employs
 [docker-compose overrides](https://docs.docker.com/compose/extends/#multiple-compose-files)
 to add a Kafka+ZooKeeper container and relevant settings.
@@ -157,9 +157,9 @@ To start the MySQL+Kafka configuration, run:
 
     $ docker-compose -f docker-compose.yml -f docker-compose-kafka.yml up
 
-Then configure the [Kafka sender](https://github.com/openzipkin/zipkin-reporter-java/blob/master/kafka11/src/main/java/zipkin2/reporter/kafka11/KafkaSender.java)
-or [Kafka 0.8 sender](https://github.com/openzipkin/zipkin-reporter-java/blob/master/kafka08/src/main/java/zipkin2/reporter/kafka08/KafkaSender.java)
-using a `bootstrapServers` value of `host.docker.internal:9092` if your application is a docker container or `localhost:19092` if not, but running on the same host.
+Then configure the [Kafka sender](https://github.com/openzipkin/zipkin-reporter-java/blob/master/kafka11/src/main/java/zipkin2/reporter/kafka11/KafkaSender.java) using a `bootstrapServers` value of `host.docker.internal:9092` if your application is inside the same docker network or `localhost:19092` if not, but running on the same host.
+
+In other words, if you are running a sample application on your laptop, you would use `localhost:19092` bootstrap server to send spans to the Kafka broker running in Docker.
 
 ### UI
 
@@ -219,8 +219,7 @@ If you are using Docker machine, adjust `KAFKA_ADVERTISED_HOST_NAME` in `docker-
 and the `bootstrapServers` configuration of the kafka sender to match your Docker host IP (ex. 192.168.99.100:19092).
 
 #### Old Kafka (0.8) setup
-
-If you prefer to activate the
+[Kafka 0.8 sender](https://github.com/openzipkin/zipkin-reporter-java/blob/master/kafka08/src/main/java/zipkin2/reporter/kafka08/KafkaSender.java) can be used against new versions of Kafka, so there's no need to downgrade to support them. If for some reason, you prefer to activate the
 [Kafka 0.8 collector](https://github.com/openzipkin/zipkin/tree/master/zipkin-collector/kafka08) (which uses ZooKeeper),
 use `docker-compose-kafka08.yml` instead of `docker-compose-kafka.yml`:
 
