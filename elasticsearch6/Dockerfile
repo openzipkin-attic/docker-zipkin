@@ -24,7 +24,7 @@ WORKDIR /elasticsearch
 RUN curl -SL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz| tar xz && \
     mv elasticsearch-$ELASTICSEARCH_VERSION/* /elasticsearch/ && \
     # disable ML as not supported on alpine per https://discuss.elastic.co/t/elasticsearch-failing-to-start-due-to-x-pack/85125/6
-    rm -rf /elasticsearch/modules/x-pack/x-pack-ml/platform/linux-x86_64 && \
+    rm -rf /elasticsearch/modules/x-pack-ml/platform/linux-x86_64 && \
     adduser -S elasticsearch && \
     chown -R elasticsearch /elasticsearch
 
