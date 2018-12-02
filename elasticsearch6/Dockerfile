@@ -14,7 +14,7 @@
 FROM openzipkin/jre-full:1.8.0_171
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ELASTICSEARCH_VERSION 6.4.2
+ENV ELASTICSEARCH_VERSION 6.5.1
 # https://github.com/elastic/elasticsearch/pull/31003 was closed won't fix
 ENV ES_TMPDIR /tmp
 
