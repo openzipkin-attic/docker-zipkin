@@ -11,7 +11,7 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 #
-FROM openzipkin/jre-full:1.8.0_171
+FROM openzipkin/jre-full:1.8.0_191
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV ELASTICSEARCH_VERSION 6.5.1

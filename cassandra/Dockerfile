@@ -1,5 +1,5 @@
 # Share the same base image to reduce layers used in testing
-FROM openzipkin/jre-full:1.8.0_171
+FROM openzipkin/jre-full:1.8.0_191
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV ZIPKIN_VERSION 2.12.0
