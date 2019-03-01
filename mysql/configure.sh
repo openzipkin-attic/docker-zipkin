@@ -23,7 +23,6 @@ USE mysql ;
 DELETE FROM mysql.user ;
 DROP DATABASE IF EXISTS test ;
 
-SET GLOBAL innodb_file_format=Barracuda ;
 CREATE DATABASE zipkin ;
 
 USE zipkin;
