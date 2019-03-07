@@ -15,7 +15,7 @@
 FROM alpine
 
 ENV ZIPKIN_REPO https://jcenter.bintray.com
-ENV ZIPKIN_VERSION 2.12.4
+ENV ZIPKIN_VERSION 2.12.5
 
 # Add environment settings for supported storage types
 COPY zipkin/ /zipkin/
@@ -37,7 +37,7 @@ RUN apk add unzip curl --no-cache && \
 FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_VERSION 2.12.4
+ENV ZIPKIN_VERSION 2.12.5
 
 # Use to set heap, trust store or other system properties.
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
