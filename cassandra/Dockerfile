@@ -1,7 +1,7 @@
 # We need a JRE to run Cassandra for setting up its schema.
 FROM openjdk:8-jre-alpine
 
-ENV ZIPKIN_VERSION 2.12.6
+ENV ZIPKIN_VERSION 2.12.7
 
 # Temporarily hard-code zipkin's configuration to a class that looks up the container's IP
 ADD ZipkinConfigurationLoader.class /cassandra/build/classes/main/ZipkinConfigurationLoader.class
