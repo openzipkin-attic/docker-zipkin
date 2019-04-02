@@ -16,7 +16,7 @@ FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
 ENV SCALA_VERSION 2.12
-ENV KAFKA_VERSION 2.1.0
+ENV KAFKA_VERSION 2.1.1
 ENV ZOOKEEPER_VERSION 3.4.13
 
 WORKDIR /kafka
