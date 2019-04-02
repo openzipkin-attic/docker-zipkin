@@ -37,8 +37,6 @@ RUN apk add unzip curl --no-cache && \
 FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ZIPKIN_VERSION 2.12.7
-
 # Use to set heap, trust store or other system properties.
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
 # 3rd party modules like zipkin-aws will apply profile settings with this

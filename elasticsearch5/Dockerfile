@@ -14,7 +14,7 @@
 
 FROM alpine
 
-ENV ELASTICSEARCH_VERSION 5.6.14
+ENV ELASTICSEARCH_VERSION 5.6.16
 
 RUN apk add --update curl
 
@@ -26,8 +26,6 @@ RUN curl -SL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-
 
 FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
-
-ENV ELASTICSEARCH_VERSION 5.6.13
 
 RUN ["/busybox/sh", "-c", "adduser -g '' -D elasticsearch"]
 

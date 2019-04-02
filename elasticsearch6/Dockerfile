@@ -14,7 +14,7 @@
 
 FROM alpine
 
-ENV ELASTICSEARCH_VERSION 6.5.1
+ENV ELASTICSEARCH_VERSION 6.7.0
 
 RUN apk add --update curl
 
@@ -26,7 +26,6 @@ RUN curl -SL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-
 FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ELASTICSEARCH_VERSION 6.6.0
 # https://github.com/elastic/elasticsearch/pull/31003 was closed won't fix
 ENV ES_TMPDIR /tmp
 

@@ -14,7 +14,7 @@
 
 FROM alpine
 
-ENV ELASTICSEARCH_VERSION 7.0.0-beta1
+ENV ELASTICSEARCH_VERSION 7.0.0-rc1
 
 RUN apk add --update curl
 
@@ -28,10 +28,8 @@ RUN curl -SL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-
 FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ELASTICSEARCH_VERSION 7.0.0-beta1
 # https://github.com/elastic/elasticsearch/pull/31003 was closed won't fix
 ENV ES_TMPDIR /tmp
-
 
 RUN ["/busybox/sh", "-c", "adduser -g '' -D elasticsearch"]
 

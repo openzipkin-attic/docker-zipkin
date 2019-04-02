@@ -25,8 +25,6 @@ RUN curl -SL https://download.elasticsearch.org/elasticsearch/release/org/elasti
 FROM gcr.io/distroless/java:11-debug
 MAINTAINER OpenZipkin "http://zipkin.io/"
 
-ENV ELASTICSEARCH_VERSION 2.4.6
-
 RUN ["/busybox/sh", "-c", "adduser -g '' -D elasticsearch"]
 
 COPY --from=0 --chown=elasticsearch /elasticsearch /elasticsearch
