@@ -13,7 +13,7 @@ ADD start.sh /kafka/bin
 
 # Share the same base image to reduce layers used in testing
 FROM gcr.io/distroless/java:11-debug
-MAINTAINER OpenZipkin "http://zipkin.io/"
+MAINTAINER Zipkin "https://zipkin.apache.org/"
 
 WORKDIR /kafka
 

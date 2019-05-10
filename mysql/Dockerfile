@@ -1,11 +1,11 @@
 FROM alpine
-MAINTAINER OpenZipkin "http://zipkin.io/"
+MAINTAINER Zipkin "https://zipkin.apache.org/"
 
 WORKDIR /mysql
 ADD install.sh /mysql/install
 RUN /mysql/install
 
-ENV ZIPKIN_VERSION 2.12.9
+ENV ZIPKIN_VERSION 2.13.0
 
 ADD configure.sh /mysql/configure
 RUN /mysql/configure

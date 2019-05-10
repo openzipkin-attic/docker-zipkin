@@ -26,7 +26,7 @@ RUN curl -SL https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-
     rm -rf /elasticsearch/modules/x-pack-ml/platform/linux-x86_64
 
 FROM gcr.io/distroless/java:11-debug
-MAINTAINER OpenZipkin "http://zipkin.io/"
+MAINTAINER Zipkin "https://zipkin.apache.org/"
 
 # https://github.com/elastic/elasticsearch/pull/31003 was closed won't fix
 ENV ES_TMPDIR /tmp

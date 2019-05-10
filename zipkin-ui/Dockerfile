@@ -1,4 +1,5 @@
 FROM nginx:1.16-alpine
+MAINTAINER Zipkin "https://zipkin.apache.org/"
 
 # This gets whatever the latest version of zipkin-lens is
 ENV ZIPKIN_REPO https://repository.apache.org/content/repositories/snapshots

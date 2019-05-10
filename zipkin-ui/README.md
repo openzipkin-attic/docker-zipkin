@@ -19,6 +19,6 @@ For example, if it calls for services names, it will end up invoking:
 `GET ${ZIPKIN_BASE_URL}/zipkin/api/v2/services`
 
 Beyond hosting of assets and forwarding, this also sets redirects,
-cache-control headers, etc similar to what the normal [zipkin-server would](https://github.com/openzipkin/zipkin/blob/master/zipkin-autoconfigure/ui/src/main/java/zipkin2/autoconfigure/ui/ZipkinUiAutoConfiguration.java).
+cache-control headers, etc similar to what the normal [zipkin-server would](https://github.com/apache/incubator-zipkin/blob/master/zipkin-server/src/main/java/zipkin2/server/internal/ui/ZipkinUiConfiguration.java).
 This lets you use a more familiar nginx syntax for things such as how long
 a browser should cache the result of the service names query.
