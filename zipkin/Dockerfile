@@ -15,7 +15,7 @@
 FROM alpine
 
 ENV ZIPKIN_REPO https://repository.apache.org/content/repositories/releases/
-ENV ZIPKIN_VERSION 2.13.0
+ENV ZIPKIN_VERSION 2.14.0
 
 # Add environment settings for supported storage types
 COPY zipkin/ /zipkin/
