@@ -77,8 +77,7 @@ For example, to add debug logging, set JAVA_OPTS as shown in our [docker-compose
 
 This project is configured to run docker containers using
 [docker-compose](https://docs.docker.com/compose/). Note that the default
-configuration requires docker-compose 1.6.0+ and docker-engine 1.10.0+. If you
-are running older versions, see the [Legacy](#legacy) section below.
+configuration requires docker-compose 1.6.0+ and docker-engine 1.10.0+.
 
 To start the default docker-compose configuration, run:
 

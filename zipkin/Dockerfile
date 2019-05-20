@@ -26,12 +26,6 @@ RUN apk add unzip curl --no-cache && \
     # don't break when unzip finds an extra header https://github.com/openzipkin/zipkin/issues/1932
     unzip zipkin-server.jar ; \
     rm zipkin-server.jar && \
-    curl -SL $ZIPKIN_REPO/org/apache/zipkin/zipkin-autoconfigure-collector-scribe/$ZIPKIN_VERSION/zipkin-autoconfigure-collector-scribe-$ZIPKIN_VERSION-module.jar > scribe.jar && \
-    unzip scribe.jar -d scribe && \
-    rm scribe.jar && \
-    curl -SL $ZIPKIN_REPO/org/apache/zipkin/zipkin-autoconfigure-collector-kafka08/$ZIPKIN_VERSION/zipkin-autoconfigure-collector-kafka08-$ZIPKIN_VERSION-module.jar > kafka08.jar && \
-    unzip kafka08.jar -d kafka08 && \
-    rm kafka08.jar && \
     apk del unzip
 
 FROM gcr.io/distroless/java:11-debug
