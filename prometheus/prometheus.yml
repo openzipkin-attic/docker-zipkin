@@ -10,4 +10,4 @@ scrape_configs:
     scrape_interval: 5s
     metrics_path: '/prometheus'
     static_configs:
-      - targets: ['172.20.4.221:9411']
+      - targets: ['zipkin:9411']
