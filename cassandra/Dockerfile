@@ -2,7 +2,7 @@
 FROM openjdk:8-jre-alpine
 
 ENV CASSANDRA_VERSION 3.11.4
-ENV ZIPKIN_VERSION 2.14.2
+ENV ZIPKIN_VERSION 2.15.0
 
 # Temporarily hard-code zipkin's configuration to a class that looks up the container's IP
 ADD ZipkinConfigurationLoader.class /cassandra/build/classes/main/ZipkinConfigurationLoader.class
