@@ -9,7 +9,7 @@ version: '2'
 services:
   # Run Elasticsearch instead of MySQL
   storage:
-    image: openzipkin/zipkin-elasticsearch6
+    image: openzipkin/zipkin-elasticsearch7
     container_name: elasticsearch
     # Uncomment to expose the storage port for testing
     # ports:
