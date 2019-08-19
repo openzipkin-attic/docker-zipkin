@@ -17,7 +17,6 @@ services:
 
   # Switch storage type to Cassandra
   zipkin:
-    image: openzipkin/zipkin
     environment:
       - STORAGE_TYPE=cassandra3
       # When using the test docker image, or have schema pre-installed, you don't need to re-install it
