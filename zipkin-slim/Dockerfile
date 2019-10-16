@@ -33,8 +33,6 @@ LABEL MAINTAINER Zipkin "https://zipkin.io/"
 
 # Use to set heap, trust store or other system properties.
 ENV JAVA_OPTS -Djava.security.egd=file:/dev/./urandom
-# 3rd party modules like zipkin-aws will apply profile settings with this
-ENV MODULE_OPTS=
 
 RUN ["/busybox/sh", "-c", "adduser -g '' -h /zipkin -D zipkin"]
 
