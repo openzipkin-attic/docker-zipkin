@@ -15,7 +15,7 @@
 FROM alpine
 
 ENV ZIPKIN_REPO https://repo1.maven.org/maven2
-ENV ZIPKIN_VERSION 2.17.2
+ENV ZIPKIN_VERSION 2.18.0
 
 # Add environment settings for supported storage types
 COPY zipkin/ /zipkin/
