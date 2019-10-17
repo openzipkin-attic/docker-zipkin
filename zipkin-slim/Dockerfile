@@ -25,6 +25,8 @@ RUN apk add unzip curl --no-cache && \
     curl -SL $ZIPKIN_REPO/io/zipkin/zipkin-server/$ZIPKIN_VERSION/zipkin-server-$ZIPKIN_VERSION-slim.jar > zipkin-slim.jar && \
     # don't break when unzip finds an extra header https://github.com/openzipkin/zipkin/issues/1932
     unzip zipkin-slim.jar ; \
+    # statically evaluate classpath to avoid https://github.com/docker/for-mac/issues/3643
+    echo .:$(ls ${PWD}/BOOT-INF/lib/*.jar|tr '\n' ':')${PWD}/BOOT-INF/classes > classpath && \
     rm zipkin-slim.jar && \
     apk del unzip
 
