@@ -1,16 +1,10 @@
 # docker-zipkin
 
-[![Build Status](https://travis-ci.org/openzipkin/docker-zipkin.svg)](https://travis-ci.org/openzipkin/docker-zipkin)
-[![zipkin](https://quay.io/repository/openzipkin/zipkin/status "zipkin")](https://quay.io/repository/openzipkin/zipkin)
-[![zipkin-slim](https://quay.io/repository/openzipkin/zipkin-slim/status "zipkin-slim")](https://quay.io/repository/openzipkin/zipkin-slim)
-[![zipkin-cassandra](https://quay.io/repository/openzipkin/zipkin-cassandra/status "zipkin-cassandra")](https://quay.io/repository/openzipkin/zipkin-cassandra)
-[![zipkin-mysql](https://quay.io/repository/openzipkin/zipkin-mysql/status "zipkin-mysql")](https://quay.io/repository/openzipkin/zipkin-mysql)
-[![zipkin-elasticsearch](https://quay.io/repository/openzipkin/zipkin-elasticsearch/status "zipkin-elasticsearch")](https://quay.io/repository/openzipkin/zipkin-elasticsearch)
-[![zipkin-elasticsearch5](https://quay.io/repository/openzipkin/zipkin-elasticsearch5/status "zipkin-elasticsearch5")](https://quay.io/repository/openzipkin/zipkin-elasticsearch5)
-[![zipkin-elasticsearch6](https://quay.io/repository/openzipkin/zipkin-elasticsearch6/status "zipkin-elasticsearch6")](https://quay.io/repository/openzipkin/zipkin-elasticsearch6)
-[![zipkin-kafka](https://quay.io/repository/openzipkin/zipkin-kafka/status "zipkin-kafka")](https://quay.io/repository/openzipkin/zipkin-kafka)
-[![zipkin-ui](https://quay.io/repository/openzipkin/zipkin-ui/status "zipkin-ui")](https://quay.io/repository/openzipkin/zipkin-ui)
+## Archived
 
+This repository is archived as it has been folded into https://github.com/openzipkin/zipkin/tree/master/docker
+
+## Overview
 
 This repository contains the Docker build definition and release process for
 [Zipkin Server](https://github.com/openzipkin/zipkin). It also contains
